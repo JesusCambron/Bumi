@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:src="@drawable/squirtle" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ebrima"
+        android:textFontWeight="400"
+        android:gravity="center"
+        android:text="Miguel Ferra"
+        android:textStyle="bold"
+        android:textSize="25sp">
+
+    </TextView>
+    <View
+        android:layout_width="200dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:background="@color/gris" >
+    </View>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ebrima"
+                android:text="150"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_gravity="center">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ebrima"
+                android:gravity="center"
+                android:text="Followers"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:layout_gravity="fill_vertical">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:fontFamily="@font/ebrima"
+                android:text="Follow"
+                android:textSize="15sp"
+                android:background="@drawable/circle">
+
+            </Button>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ebrima"
+                android:gravity="center"
+                android:text="120"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_gravity="center">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ebrima"
+                android:gravity="center"
+                android:text="Following"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:layout_gravity="fill_vertical">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:src="@drawable/logo_plantas"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton>
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:src="@drawable/agua_logo"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton><ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        android:src="@drawable/reciclaje_logo"
+        android:scaleType="fitCenter">
+
+    </ImageButton>
+
+    </GridLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bio"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Muro"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chat"/>
+
+    </com.google.android.material.tabs.TabLayout>
+</LinearLayout>
