@@ -133,6 +133,7 @@
         android:layout_gravity="center">
 
         <ImageButton
+            android:id="@+id/boton_plantas"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@null"
@@ -142,6 +143,7 @@
 
         </ImageButton>
         <ImageButton
+            android:id="@+id/boton_agua"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@null"
@@ -149,7 +151,8 @@
             android:scaleType="fitCenter"
             android:layout_marginRight="25dp">
 
-        </ImageButton><ImageButton
+        </ImageButton>
+        <ImageButton android:id="@+id/boton_reciclaje"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@null"
@@ -171,10 +174,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Muro"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chat"/>
 
     </com.google.android.material.tabs.TabLayout>
 </LinearLayout>
