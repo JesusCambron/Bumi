@@ -1,10 +1,8 @@
 package bumi.emptyactivity
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 
 class Profile : AppCompatActivity() {
@@ -21,7 +19,7 @@ class Profile : AppCompatActivity() {
 
         val button_agua = findViewById<ImageButton>(R.id.boton_agua)
         button_agua.setOnClickListener{
-            val intent = Intent(this, activity_agua::class.java)
+            val intent = Intent(this, AguaActivity::class.java)
             startActivity(intent)
         }
     }
