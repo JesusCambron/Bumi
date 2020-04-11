@@ -85,6 +85,7 @@
                 android:layout_height="25dp"
                 android:fontFamily="@font/ebrima"
                 android:text="Follow"
+                android:textColor="@color/blanco"
                 android:textSize="15sp"
                 android:background="@drawable/circle">
 
@@ -133,7 +134,7 @@
         android:layout_gravity="center">
 
         <ImageButton
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
             android:background="@null"
             android:src="@drawable/logo_plantas"
@@ -142,7 +143,7 @@
 
         </ImageButton>
         <ImageButton
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
             android:background="@null"
             android:src="@drawable/agua_logo"
@@ -150,7 +151,7 @@
             android:layout_marginRight="25dp">
 
         </ImageButton><ImageButton
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:background="@null"
         android:src="@drawable/reciclaje_logo"

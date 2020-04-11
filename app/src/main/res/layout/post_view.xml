@@ -8,8 +8,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingVertical="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:text="Inicio"
+            android:background="@drawable/circle"
+            android:textColor="@color/blanco"
+            android:fontFamily="@font/ebrima"
+            android:textStyle="bold"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+        </TextView>
 
         <TextView
+            android:layout_marginTop="20dp"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_title"
@@ -25,18 +40,20 @@
 
         </TextView>
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_width="320dp"
+            android:layout_height="250dp"
             android:src="@drawable/sunflower"
             android:scaleType="centerCrop">
 
         </ImageView>
         <TextView
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ebrima"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:text="El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles">
 
