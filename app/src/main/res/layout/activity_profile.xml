@@ -84,6 +84,7 @@
                 android:layout_width="100dp"
                 android:layout_height="25dp"
                 android:fontFamily="@font/ebrima"
+                android:textColor="@color/blanco"
                 android:text="Follow"
                 android:textSize="15sp"
                 android:background="@drawable/circle">
@@ -129,12 +130,13 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_gravity="center">
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/botonPlantas"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
             android:background="@null"
             android:src="@drawable/logo_plantas"
             android:scaleType="fitCenter"
@@ -142,21 +144,23 @@
 
         </ImageButton>
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/botonAgua"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
             android:background="@null"
             android:src="@drawable/agua_logo"
             android:scaleType="fitCenter"
             android:layout_marginRight="25dp">
 
-        </ImageButton><ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@null"
-        android:src="@drawable/reciclaje_logo"
-        android:scaleType="fitCenter">
-
-    </ImageButton>
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/botonReciclaje"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
+            android:background="@null"
+            android:src="@drawable/reciclaje_logo"
+            android:scaleType="fitCenter">
+        </ImageButton>
 
     </GridLayout>
     <com.google.android.material.tabs.TabLayout
