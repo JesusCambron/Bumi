@@ -84,6 +84,7 @@
                 android:layout_width="100dp"
                 android:layout_height="25dp"
                 android:fontFamily="@font/ebrima"
+                android:textColor="@color/blanco"
                 android:text="Follow"
                 android:textColor="@color/blanco"
                 android:textSize="15sp"
@@ -131,13 +132,19 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_gravity="center">
 
         <ImageButton
+<<<<<<< HEAD
             android:id="@+id/boton_plantas"
             android:layout_width="80dp"
             android:layout_height="80dp"
+=======
+            android:id="@+id/botonPlantas"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
+>>>>>>> jcambron
             android:background="@null"
             android:src="@drawable/logo_plantas"
             android:scaleType="fitCenter"
@@ -145,15 +152,22 @@
 
         </ImageButton>
         <ImageButton
+<<<<<<< HEAD
             android:id="@+id/boton_agua"
             android:layout_width="80dp"
             android:layout_height="80dp"
+=======
+            android:id="@+id/botonAgua"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
+>>>>>>> jcambron
             android:background="@null"
             android:src="@drawable/agua_logo"
             android:scaleType="fitCenter"
             android:layout_marginRight="25dp">
 
         </ImageButton>
+<<<<<<< HEAD
         <ImageButton android:id="@+id/boton_reciclaje"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -162,6 +176,16 @@
         android:scaleType="fitCenter">
 
     </ImageButton>
+=======
+        <ImageButton
+            android:id="@+id/botonReciclaje"
+            android:layout_width="@dimen/widthIconos"
+            android:layout_height="@dimen/heightIconos"
+            android:background="@null"
+            android:src="@drawable/reciclaje_logo"
+            android:scaleType="fitCenter">
+        </ImageButton>
+>>>>>>> jcambron
 
     </GridLayout>
     <com.google.android.material.tabs.TabLayout

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".AguaActivity"></activity>
+=======
+        <activity android:name=".PantallaPost"></activity>
+        <activity android:name=".Opciones" />
+>>>>>>> jcambron
         <activity
             android:name=".SplashBumi"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -19,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlantasActivity" />
+        <activity android:name=".PlantasMenu" />
         <activity android:name=".Profile" />
         <activity android:name=".MainActivity" />
     </application>

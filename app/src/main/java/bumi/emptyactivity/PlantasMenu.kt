@@ -1,12 +1,16 @@
 package bumi.emptyactivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 
-class PlantasActivity : AppCompatActivity() {
+class PlantasMenu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plantas)
+
+
     }
 }
