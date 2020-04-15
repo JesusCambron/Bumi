@@ -32,13 +32,13 @@ class Opciones : AppCompatActivity() {
                     imagen.setImageResource(R.drawable.plantas)
                 }
                 "agua"->{
-                    cargarOpcionesAgua()
+                    //cargarOpcionesAgua()
                     adaptador = AdaptadorOpciones(this,listaDeOpcionesPlantas)
                     texto.setText("Agua")
                     imagen.setImageResource(R.drawable.agua)
                 }
                 "reciclaje"->{
-                    cargarOpcionesReciclaje()
+                    //cargarOpcionesReciclaje()
                     adaptador = AdaptadorOpciones(this,listaDeOpcionesPlantas)
                     texto.setText("Reciclaje")
                     imagen.setImageResource(R.drawable.reciclaje)
@@ -81,7 +81,8 @@ class Opciones : AppCompatActivity() {
         lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
         return lista
     }
-
+/*
+//cargar catalogo para cada una
     fun cargarOpcionesAgua(){
         this.listaDeOpcionesAgua.add("Consejo")
         this.listaDeOpcionesAgua.add("Temporizador")
@@ -93,7 +94,7 @@ class Opciones : AppCompatActivity() {
         this.listaDeOpcionesReciclaje.add("Favoritos")
         this.listaDeOpcionesReciclaje.add("Destacados")
         this.listaDeOpcionesReciclaje.add("Mis posts")
-    }
+    }*/
 
     private class AdaptadorOpciones: BaseAdapter {
         var contexto: Context? = null
