@@ -3,7 +3,6 @@ package bumi.emptyactivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 
 class Profile : AppCompatActivity() {
@@ -12,11 +11,24 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        var intento: Intent = Intent(this, PlantasActivity::class.java)
+        var intento: Intent = Intent(this, Opciones::class.java)
 
-        val boton: ImageButton = findViewById(R.id.botonPlantas) as ImageButton
+        val botonPlantas: ImageButton = findViewById(R.id.botonPlantas) as ImageButton
+        val botonAgua: ImageButton = findViewById(R.id.botonAgua) as ImageButton
+        val botonReciclaje: ImageButton = findViewById(R.id.botonReciclaje) as ImageButton
 
-        boton.setOnClickListener {
+        botonPlantas.setOnClickListener {
+            intento.putExtra("type","plantas")
+            startActivity(intento)
+        }
+
+        botonAgua.setOnClickListener {
+            intento.putExtra("type","agua")
+            startActivity(intento)
+        }
+
+        botonReciclaje.setOnClickListener {
+            intento.putExtra("type","reciclaje")
             startActivity(intento)
         }
     }

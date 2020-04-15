@@ -10,21 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/widthFondoSeccion"
             android:scaleType="centerCrop"
             android:src="@drawable/plantas">
 
         </ImageView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/ebrima"
             android:gravity="center"
             android:text="Plantas"
             android:textColor="@color/blanco"
-            android:fontFamily="@font/ebrima"
-            android:textStyle="bold"
-            android:textSize="35sp">
+            android:textSize="35sp"
+            android:textStyle="bold">
 
         </TextView>
     </FrameLayout>
@@ -39,6 +42,7 @@
 
 
         <Button
+            android:id="@+id/botonInicio"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:fontFamily="@font/ebrima"
