@@ -82,6 +82,7 @@ class Opciones : AppCompatActivity() {
         return lista
     }
 /*
+//cargar catalogo para cada una
     fun cargarOpcionesAgua(){
         this.listaDeOpcionesAgua.add("Consejo")
         this.listaDeOpcionesAgua.add("Temporizador")
