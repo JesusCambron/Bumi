@@ -101,6 +101,7 @@ class Opciones : AppCompatActivity() {
         lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
         lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
         return lista
+
     }
 
     fun cargarCatalogoHerramientasAgua():ArrayList<Post>{
@@ -115,6 +116,7 @@ class Opciones : AppCompatActivity() {
         lista.add(Post("Foto",R.drawable.awa,"Ahorro: 150Lts "))
         return lista
     }
+
 
     fun cargarOpcionesReciclaje(){
         this.listaDeOpcionesReciclaje.add(Opcion("Inicio",cargarCatalogoInicioReciclaje()))
@@ -150,7 +152,6 @@ class Opciones : AppCompatActivity() {
         lista.add(Post("Foto",R.drawable.reciclaje,"El mundo puede recuperarse"))
         return lista
     }
-
 
     private class AdaptadorOpciones: BaseAdapter {
         var contexto: Context? = null
