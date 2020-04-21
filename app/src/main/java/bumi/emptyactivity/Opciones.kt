@@ -98,8 +98,10 @@ class Opciones : AppCompatActivity() {
 
     fun cargarCatalogoTemporizadorAgua():ArrayList<Post> {
         var lista = ArrayList<Post>()
+        /*
         lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
         lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
+        */
         return lista
 
     }
@@ -165,14 +167,24 @@ class Opciones : AppCompatActivity() {
             //var inflator = LayoutInflater.from(contexto)
             var inflator = contexto!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var vista = inflator.inflate(R.layout.pantalla_opciones, null)
+
+
             vista.botonOpcion.setText(option.opcion)
 
-            vista.botonOpcion.setOnClickListener{
-                var intento = Intent(contexto,PantallaPost::class.java)
-                intento.putExtra("opcion",option.opcion)
-                intento.putExtra("catalogo",option.catalogo)
-                contexto!!.startActivity(intento)
+            if(option.opcion.equals("Temporizador")) {
+                vista.botonOpcion.setOnClickListener{
+                    var intentoReloj: Intent = Intent(contexto, Reloj::class.java)
+                    contexto!!.startActivity(intentoReloj)
+                }
+            } else {
+                vista.botonOpcion.setOnClickListener{
+                    var intento = Intent(contexto,PantallaPost::class.java)
+                    intento.putExtra("opcion",option.opcion)
+                    intento.putExtra("catalogo",option.catalogo)
+                    contexto!!.startActivity(intento)
+                }
             }
+
 
             return vista
         }
