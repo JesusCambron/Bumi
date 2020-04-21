@@ -12,13 +12,11 @@ class Profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         var intento: Intent = Intent(this, Opciones::class.java)
-        var intento2: Intent = Intent(this, Reloj::class.java)
+        //var intento2: Intent = Intent(this, Reloj::class.java)
 
         val botonPlantas: ImageButton = findViewById(R.id.botonPlantas) as ImageButton
         val botonAgua: ImageButton = findViewById(R.id.botonAgua) as ImageButton
         val botonReciclaje: ImageButton = findViewById(R.id.botonReciclaje) as ImageButton
-
-
 
         botonPlantas.setOnClickListener {
             intento.putExtra("type","plantas")

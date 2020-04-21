@@ -36,9 +36,6 @@ class Reloj : AppCompatActivity() {
                 }
             }
         }).start()
-
-
-
         botonTiempo.setOnClickListener {
             isOn=!isOn
             if(isOn) {
