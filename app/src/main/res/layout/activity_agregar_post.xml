@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarPost"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/circle">
+
+        <ImageButton
+            android:id="@+id/botonImagen"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/imagen_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="20dp">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/botonVideo"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/video_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/botonGif"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/gif_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton>
+
+
+    </GridLayout>
+
+
+    <EditText
+        android:id="@+id/fname"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="250dp"
+        android:background="@drawable/textbox"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="20dp"
+        />
+
+
+
+</LinearLayout>
