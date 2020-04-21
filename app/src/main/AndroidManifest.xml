@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AgregarPost"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".AgregarPost" />
         <activity android:name=".Reloj" />
         <activity android:name=".PantallaPost" />
         <activity android:name=".Opciones" />
