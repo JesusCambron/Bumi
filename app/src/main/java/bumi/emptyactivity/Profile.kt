@@ -11,7 +11,7 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        var intento: Intent = Intent(this, Opciones::class.java)
+        var intento: Intent = Intent(this, AgregarPost::class.java)
         var intento2: Intent = Intent(this, Reloj::class.java)
 
         val botonPlantas: ImageButton = findViewById(R.id.botonPlantas) as ImageButton
