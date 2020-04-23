@@ -21,6 +21,10 @@ class Profile : AppCompatActivity() {
         val botonAgua: ImageButton = findViewById(R.id.botonAgua) as ImageButton
         val botonReciclaje: ImageButton = findViewById(R.id.botonReciclaje) as ImageButton
 
+        boton_cerrarsesion.setOnClickListener {
+            finish()
+        }
+
 
         var bundle = intent.extras
         if (bundle != null){

@@ -2,9 +2,8 @@ package bumi.emptyactivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class Login : AppCompatActivity() {
 
     val RC_SIGN_IN = 123
+    val COD_LOGOUT = 321
     lateinit var mGoogleSignInClient : GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,28 @@ class Login : AppCompatActivity() {
                 GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
+        if (requestCode == COD_LOGOUT){
+            signOut()
+        }
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        updateUI(account)
+    }
+    private fun signOut(){
+        mGoogleSignInClient.signOut()
+            .addOnCompleteListener(this){
+                Toast.makeText(this,"Sesion cerrada",Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -69,7 +91,7 @@ class Login : AppCompatActivity() {
             val intent = Intent(this,Profile::class.java)
             intent.putExtra("name",account.displayName)
             intent.putExtra("email",account.email)
-            startActivity(intent)
+            startActivityForResult(intent,COD_LOGOUT)
         }
 
     }
