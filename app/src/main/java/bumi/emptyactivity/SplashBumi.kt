@@ -16,7 +16,7 @@ class SplashBumi : AppCompatActivity() {
         setContentView(R.layout.activity_splash_bumi)
 
         Handler().postDelayed({
-            startActivity(Intent(this@SplashBumi,Profile::class.java))
+            startActivity(Intent(this@SplashBumi,Login::class.java))
             finish()
         },3000)
     }
