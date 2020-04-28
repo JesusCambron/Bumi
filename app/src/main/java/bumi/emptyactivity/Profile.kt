@@ -13,7 +13,7 @@ class Profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
 
-        var intento: Intent = Intent(this, Login::class.java)
+        var intento: Intent = Intent(this, Opciones::class.java)
         //var intento2: Intent = Intent(this, Reloj::class.java)
 
 
@@ -25,13 +25,13 @@ class Profile : AppCompatActivity() {
             finish()
         }
 
-
+/*
         var bundle = intent.extras
         if (bundle != null){
             val nombre = bundle.getString("name")
 
             profile_name.setText(nombre)
-        }
+        }*/
 
         botonPlantas.setOnClickListener {
             intento.putExtra("type","plantas")
