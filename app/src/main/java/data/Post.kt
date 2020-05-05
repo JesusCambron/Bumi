@@ -1,4 +1,4 @@
-package bumi.emptyactivity
+package data
 
 import java.io.Serializable
 

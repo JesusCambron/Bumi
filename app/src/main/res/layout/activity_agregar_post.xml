@@ -67,6 +67,17 @@
         android:paddingTop="10dp"
         />
 
+    <Button
+        android:id="@+id/botonPost"
+        android:layout_marginTop="30dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Post"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:textColor="@color/blanco"
+        android:background="@drawable/circle"/>
+
 
 
 </LinearLayout>

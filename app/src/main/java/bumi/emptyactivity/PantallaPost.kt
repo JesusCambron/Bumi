@@ -8,9 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
-import kotlinx.android.synthetic.main.activity_pantalla_post.view.*
-import kotlinx.android.synthetic.main.activity_pantalla_post.view.opcion
 import kotlinx.android.synthetic.main.post_view.view.*
 
 class PantallaPost : AppCompatActivity() {
