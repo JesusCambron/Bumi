@@ -1,14 +1,16 @@
 package bumi.emptyactivity
 
+import android.app.Activity
 import android.content.Intent
-import android.media.Image
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import data.Post
 import kotlinx.android.synthetic.main.activity_agregar_post.*
-import kotlinx.android.synthetic.main.activity_opciones.*
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 
 
 class AgregarPost : AppCompatActivity() {
@@ -17,8 +19,7 @@ class AgregarPost : AppCompatActivity() {
     val IMAG_PICK_CODE: Int = 1000
     val PERMISSION_CODE: Int = 1001
     var tipo:String = ""
-    val PICK_IMAGE = 1
-
+    var IMAGEN:Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +29,14 @@ class AgregarPost : AppCompatActivity() {
         var videoButton: ImageButton = findViewById(R.id.botonVideo)
 
         imageButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
+            pickFromGallery()
             tipo = "Imagen"
-
         })
         videoButton.setOnClickListener(View.OnClickListener {
             val intent = Intent()
             intent.type = "video/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAG_PICK_CODE)
             tipo = "Video"
         })
         var botonGif:ImageButton = findViewById(R.id.botonGif) as ImageButton
@@ -49,17 +46,34 @@ class AgregarPost : AppCompatActivity() {
         }
 
         botonPost.setOnClickListener {
-            Opciones.listaDeOpcionesPlantas.get(0).catalogo.add(Post(tipo,R.drawable.sunflower, fname.text.toString()
-            ))
-
+            PantallaPost.posts.add(Post(tipo,IMAGEN, fname.text.toString()))
+            this.finish()
         }
 
+    }
+    private fun pickFromGallery() {
+        //Create an Intent with action as ACTION_PICK
+        val intent = Intent(Intent.ACTION_PICK)
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.type = "image/*"
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        val mimeTypes =
+            arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        // Launching the Intent
+        startActivityForResult(intent, IMAG_PICK_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE) {
-            //TODO: action
+        if (resultCode === Activity.RESULT_OK)
+            when (requestCode) {
+                IMAG_PICK_CODE -> {
+                    val imageUri = data!!.data
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+                    IMAGEN = bitmap
+
+            }
         }
     }
     
