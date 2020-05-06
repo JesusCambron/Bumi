@@ -25,13 +25,6 @@ class Profile : AppCompatActivity() {
             finish()
         }
 
-/*
-        var bundle = intent.extras
-        if (bundle != null){
-            val nombre = bundle.getString("name")
-
-            profile_name.setText(nombre)
-        }*/
 
         botonPlantas.setOnClickListener {
             intento.putExtra("type","plantas")
