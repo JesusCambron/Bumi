@@ -26,7 +26,7 @@ class Reloj : AppCompatActivity() {
         Thread(Runnable {
             while (true) {
                 if(isOn) {
-                    if(milisegundos == 440) {
+                    if(milisegundos == 999) {
                         milisegundos=0
                         this.runOnUiThread(Runnable { actualizarReloj() })
                     }
@@ -36,9 +36,6 @@ class Reloj : AppCompatActivity() {
                 }
             }
         }).start()
-
-
-
         botonTiempo.setOnClickListener {
             isOn=!isOn
             if(isOn) {

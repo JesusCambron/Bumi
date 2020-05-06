@@ -55,14 +55,28 @@
 
     <EditText
         android:id="@+id/fname"
+        android:hint="Escribe algo aquí"
+        android:gravity="top"
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:layout_height="250dp"
         android:background="@drawable/textbox"
-        android:paddingHorizontal="5dp"
-        android:paddingVertical="20dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
         />
+
+    <Button
+        android:id="@+id/botonPost"
+        android:layout_marginTop="30dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Post"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:textColor="@color/blanco"
+        android:background="@drawable/circle"/>
 
 
 
