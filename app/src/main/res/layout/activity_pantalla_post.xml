@@ -29,13 +29,14 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp">
+
         <GridView
-            android:layout_marginTop="10dp"
             android:id="@+id/listaPost"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
-            android:numColumns="1"
-            android:gravity="center"/>
+            android:layout_height="286dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:numColumns="1" />
     </LinearLayout>
 
     <LinearLayout
