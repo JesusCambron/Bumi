@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarPost"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/circle">
+
+        <ImageButton
+            android:id="@+id/botonImagen"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/imagen_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="20dp">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/botonVideo"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/video_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/botonGif"
+            android:layout_gravity="center_vertical"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/gif_icon"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="25dp">
+
+        </ImageButton>
+
+
+    </GridLayout>
+
+
+    <EditText
+        android:id="@+id/fname"
+        android:hint="Escribe algo aquí"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="250dp"
+        android:background="@drawable/textbox"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        />
+    <!--
+    <ImageView
+        android:id="@+id/preimagen"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/awa"/>
+        -->
+    <TextView
+        android:id="@+id/textv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JAJAJAJJA"/>
+
+    <Button
+        android:id="@+id/botonAgregar"
+        android:layout_marginTop="30dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Post"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:textColor="@color/blanco"
+        android:background="@drawable/circle"/>
+
+
+
+</LinearLayout>

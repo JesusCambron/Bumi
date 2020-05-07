@@ -10,187 +10,149 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.activity_opciones.*
 import kotlinx.android.synthetic.main.pantalla_opciones.view.*
+import data.Post
+import data.Opcion
 
 class Opciones : AppCompatActivity() {
 
-    var listaDeOpcionesPlantas = ArrayList<Opcion>()
-    var listaDeOpcionesAgua = ArrayList<Opcion>()
-    var listaDeOpcionesReciclaje = ArrayList<Opcion>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var adaptador:AdaptadorOpciones?=null
         setContentView(R.layout.activity_opciones)
+
+
         val bundle = intent.extras
+
         if(bundle!=null){
-            val type=bundle.getString("type")
+            val type= bundle.getString("type")
             when(type) {
+
                 "plantas"->{
-                    cargarOpcionesPlantas()
-                    adaptador = AdaptadorOpciones(this,listaDeOpcionesPlantas)
+
+                    boton1.setText("Inicio")
+                    boton2.setText("Favoritos")
+                    boton3.setText("Destacados")
+                    boton4.setText("Mis plantas")
                     texto.setText("Plantas")
                     imagen.setImageResource(R.drawable.plantas)
+                    boton1.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","plantasInicio")
+                        startActivity(intentPost)
+                    })
+                    boton2.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","plantasFavoritos")
+                        startActivity(intentPost)
+                    })
+                    boton3.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","plantasDestacados")
+                        startActivity(intentPost)
+                    })
+                    boton4.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","plantasMisPlantas")
+                        startActivity(intentPost)
+                    })
                 }
                 "agua"->{
-                    cargarOpcionesAgua()
-                    adaptador = AdaptadorOpciones(this,listaDeOpcionesAgua)
+                    boton1.setText("Consejos")
+                    boton2.setText("Temporizador")
+                    boton3.setText("Herramientas Canciones")
+                    boton4.setText("Litros Ahorrados")
                     texto.setText("Agua")
                     imagen.setImageResource(R.drawable.agua)
+                    boton1.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","aguaConsejos")
+                        startActivity(intentPost)
+                    })
+                    boton2.setOnClickListener(View.OnClickListener {
+                        var intentoReloj: Intent = Intent(this, Reloj::class.java)
+                        intentoReloj.putExtra("tipo","aguaTemporizador")
+                        startActivity(intentoReloj)
+                    })
+                    boton3.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","aguaCanciones")
+                        startActivity(intentPost)
+                    })
+                    boton4.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","aguaLitros")
+                        startActivity(intentPost)
+                    })
                 }
                 "reciclaje"->{
-                    cargarOpcionesReciclaje()
-                    adaptador = AdaptadorOpciones(this,listaDeOpcionesReciclaje)
+                    boton1.setText("Inicio")
+                    boton2.setText("Favoritos")
+                    boton3.setText("Destacados")
+                    boton4.setText("Mis posts")
                     texto.setText("Reciclaje")
                     imagen.setImageResource(R.drawable.reciclaje)
+                    boton1.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","reciclajeInicio")
+                        startActivity(intentPost)
+                    })
+                    boton2.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","reciclajeFavoritos")
+                        startActivity(intentPost)
+                    })
+                    boton3.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","reciclajeMispost")
+                        startActivity(intentPost)
+                    })
+                    boton4.setOnClickListener(View.OnClickListener {
+                        var intentPost = Intent(this,PantallaPost::class.java)
+                        intentPost.putExtra("tipo","reciclajeReciclaje")
+                        startActivity(intentPost)
+                    })
                 }
             }
         }
-        listaOpciones.adapter= adaptador
-    }
-
-    fun cargarOpcionesPlantas(){
-        this.listaDeOpcionesPlantas.add(Opcion("Inicio",cargarCatalogoInicioPlantas()))
-        this.listaDeOpcionesPlantas.add(Opcion("Favoritos",cargarCatalogoFavoritosPlantas()))
-        this.listaDeOpcionesPlantas.add(Opcion("Destacados",cargarCatalogoDestacadosPlantas()))
-        this.listaDeOpcionesPlantas.add(Opcion("Mis Plantas",cargarCatalogoMisPlantas()))
-    }
-
-    fun cargarCatalogoInicioPlantas():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        return lista
-    }
-
-    fun cargarCatalogoFavoritosPlantas():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        return lista
-    }
-
-    fun cargarCatalogoDestacadosPlantas():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        return lista
-    }
-
-    fun cargarCatalogoMisPlantas():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        lista.add(Post("Foto",R.drawable.sunflower,"El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"))
-        return lista
-    }
-
-//cargar catalogo para cada una
-    fun cargarOpcionesAgua(){
-        this.listaDeOpcionesAgua.add(Opcion("Catalogo",cargarCatalogoConsejosAgua()))
-        this.listaDeOpcionesAgua.add(Opcion("Temporizador",cargarCatalogoTemporizadorAgua()))
-        this.listaDeOpcionesAgua.add(Opcion("Herramientas Canciones",cargarCatalogoHerramientasAgua()))
-        this.listaDeOpcionesAgua.add(Opcion("Litros Ahorrados",cargarCatalogoLitrosAhorradosAgua()))
-    }
-
-    fun cargarCatalogoConsejosAgua():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"Al bañarte rápido ahorras agua"))
-        lista.add(Post("Foto",R.drawable.sunflower,"La ducha debe durar entre 5 y 10 min maximo"))
-        return lista
-    }
-
-    fun cargarCatalogoTemporizadorAgua():ArrayList<Post> {
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
-        lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
-        return lista
-    }
-
-    fun cargarCatalogoHerramientasAgua():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.sunflower,"Sunflower By Post Malone ft. Swalee"))
-        lista.add(Post("Foto",R.drawable.awa,"Whiskey in the jar By Metallica"))
-        return lista
-    }
-
-    fun cargarCatalogoLitrosAhorradosAgua():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.awa,"Ahorro: 150Lts "))
-        return lista
+        //listaOpciones.adapter= adaptador
     }
 
 
-
-    fun cargarOpcionesReciclaje(){
-        this.listaDeOpcionesReciclaje.add(Opcion("Inicio",cargarCatalogoInicioReciclaje()))
-        this.listaDeOpcionesReciclaje.add(Opcion("Favoritos",cargarCatalogoFavoritosReciclaje()))
-        this.listaDeOpcionesReciclaje.add(Opcion("Destacados",cargarCatalogoDestacadosReciclaje()))
-        this.listaDeOpcionesReciclaje.add(Opcion("Mis posts",cargarCatalogoMisPostsReciclaje()))
+    /**private class AdaptadorOpciones: BaseAdapter {
+    var contexto: Context? = null
+    var opciones = ArrayList<Opcion>()
+    constructor(context: Context, opciones:ArrayList<Opcion>){
+    this.contexto=context
+    this.opciones = opciones
     }
-
-    fun cargarCatalogoInicioReciclaje():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.reciclaje_logo,"El reciclaje es lo máximo"))
-        lista.add(Post("Foto",R.drawable.reciclaje,"El mundo puede recuperarse"))
-        return lista
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    var option = opciones[position]
+    //var inflator = LayoutInflater.from(contexto)
+    var inflator = contexto!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    var vista = inflator.inflate(R.layout.pantalla_opciones, null)
+    vista.botonOpcion.setText(option.opcion)
+    if(option.opcion.equals("Temporizador")) {
+    vista.botonOpcion.setOnClickListener{
+    var intentoReloj: Intent = Intent(contexto, Reloj::class.java)
+    contexto!!.startActivity(intentoReloj)
     }
-
-    fun cargarCatalogoFavoritosReciclaje():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.reciclaje_logo,"El reciclaje es lo máximo"))
-        lista.add(Post("Foto",R.drawable.reciclaje,"El mundo puede recuperarse"))
-        return lista
+    } else {
+    vista.botonOpcion.setOnClickListener{
+    var intento = Intent(contexto,PantallaPost::class.java)
+    intento.putExtra("opcion",option.opcion)
+    intento.putExtra("catalogo",option.catalogo)
+    contexto!!.startActivity(intento)
     }
-
-    fun cargarCatalogoDestacadosReciclaje():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.reciclaje_logo,"El reciclaje es lo máximo"))
-        lista.add(Post("Foto",R.drawable.reciclaje,"El mundo puede recuperarse"))
-        return lista
     }
-
-    fun cargarCatalogoMisPostsReciclaje():ArrayList<Post>{
-        var lista = ArrayList<Post>()
-        lista.add(Post("Foto",R.drawable.reciclaje_logo,"El reciclaje es lo máximo"))
-        lista.add(Post("Foto",R.drawable.reciclaje,"El mundo puede recuperarse"))
-        return lista
+    return vista
     }
-
-
-
-    private class AdaptadorOpciones: BaseAdapter {
-        var contexto: Context? = null
-        var opciones = ArrayList<Opcion>()
-        constructor(context: Context, opciones:ArrayList<Opcion>){
-            this.contexto=context
-            this.opciones = opciones
-        }
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var option = opciones[position]
-            //var inflator = LayoutInflater.from(contexto)
-            var inflator = contexto!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var vista = inflator.inflate(R.layout.pantalla_opciones, null)
-            vista.botonOpcion.setText(option.opcion)
-
-            vista.botonOpcion.setOnClickListener{
-                var intento = Intent(contexto,PantallaPost::class.java)
-                intento.putExtra("opcion",option.opcion)
-                intento.putExtra("catalogo",option.catalogo)
-                contexto!!.startActivity(intento)
-            }
-
-            return vista
-        }
-
-        override fun getItem(position: Int): Any {
-            return opciones[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-            return 1
-        }
-
-        override fun getCount(): Int {
-            return opciones.size
-        }
-
+    override fun getItem(position: Int): Any {
+    return opciones[position]
     }
+    override fun getItemId(position: Int): Long {
+    return 1
+    }
+    override fun getCount(): Int {
+    return opciones.size
+    }
+    }**/
 }
