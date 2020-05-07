@@ -2,10 +2,12 @@ package bumi.emptyactivity
 
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ class AgregarPost : AppCompatActivity() {
 
 
     val IMAG_PICK_CODE: Int = 1000
+    val VIDEO_PICK_CODE: Int = 999
     val PERMISSION_CODE: Int = 1001
     var tipo:String = ""
     var IMAGEN:Bitmap? = null
@@ -32,13 +35,23 @@ class AgregarPost : AppCompatActivity() {
             pickFromGallery()
             tipo = "Imagen"
         })
+
         videoButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent()
-            intent.type = "video/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAG_PICK_CODE)
-            tipo = "Video"
+            if (Build.VERSION.SDK_INT <= 19) {
+                val i = Intent()
+                i.type = "video/*"
+                i.action = Intent.ACTION_GET_CONTENT
+                i.addCategory(Intent.CATEGORY_OPENABLE)
+                startActivityForResult(i, VIDEO_PICK_CODE)
+            } else if (Build.VERSION.SDK_INT > 19) {
+                val intent = Intent(
+                    Intent.ACTION_PICK,
+                    MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                )
+                startActivityForResult(intent, VIDEO_PICK_CODE)
+            }
         })
+
         var botonGif:ImageButton = findViewById(R.id.botonGif) as ImageButton
 
         botonGif.setOnClickListener {
@@ -46,22 +59,21 @@ class AgregarPost : AppCompatActivity() {
         }
 
         botonPost.setOnClickListener {
-            PantallaPost.posts.add(Post(tipo,IMAGEN, fname.text.toString()))
+            PantallaPost.posts.add(0,Post(tipo,IMAGEN, fname.text.toString()))
             this.finish()
+            val returnIntent = Intent()
+            setResult(Activity.RESULT_CANCELED, returnIntent)
+            finish()
         }
 
     }
     private fun pickFromGallery() {
-        //Create an Intent with action as ACTION_PICK
-        val intent = Intent(Intent.ACTION_PICK)
-        // Sets the type as image/*. This ensures only components of type image are selected
+
+        val intent = Intent()
         intent.type = "image/*"
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        val mimeTypes =
-            arrayOf("image/jpeg", "image/png")
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-        // Launching the Intent
-        startActivityForResult(intent, IMAG_PICK_CODE)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAG_PICK_CODE)
+        tipo = "Imagen"
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -73,9 +85,28 @@ class AgregarPost : AppCompatActivity() {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
                     IMAGEN = bitmap
 
-            }
+                }
+                VIDEO_PICK_CODE -> {
+                    val selectedVideoUri: Uri = data!!.data!!
+                    val selectedVideoPath: String? = getRealPathFromURI(selectedVideoUri)
+                    textv.text = selectedVideoPath
+                }
+
         }
     }
-    
+
+    fun getRealPathFromURI(uri: Uri): String? {
+        var cursor: Cursor? = null
+        return try {
+            val proj =
+                arrayOf(MediaStore.Images.Media.DATA)
+            cursor = this.getContentResolver().query(uri, proj, null, null, null)
+            val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            cursor.getString(column_index)
+        } finally {
+            cursor?.close()
+        }
+    }
 
 }

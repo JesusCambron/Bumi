@@ -31,20 +31,56 @@ class PantallaPost : AppCompatActivity() {
         if(bundle != null) {
             val type = bundle.getString("tipo")
             when(type){
-                "plantasInicio" -> adaptador = AdaptadorPosts(this,posts)
-                "plantasFavoritos" -> adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
-                "plantasDestacados" -> adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
-                "plantasMisPlantas" -> adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                "plantasInicio" -> {
+                    adaptador = AdaptadorPosts(this,posts)
+                    opcion.text = "Inicio"
+                }
+                "plantasFavoritos" -> {
+                    opcion.text = "Favoritos"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                }
+                "plantasDestacados" -> {
+                    opcion.text = "Destacados"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
+                }
+                "plantasMisPlantas" -> {
+                    opcion.text = "Mis Plantas"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                }
 
-                "aguaConsejos" -> adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
-                "aguaTemporizador" -> adaptador = AdaptadorPosts(this,cargarCatalogoTemporizadorAgua())
-                "aguaCanciones" -> adaptador = AdaptadorPosts(this,cargarCatalogoHerramientasAgua())
-                "aguaLitros" -> adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
+                "aguaConsejos" -> {
+                    opcion.text = "Consejos"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
+                }
+                "aguaTemporizador" -> {
+                    opcion.text = "Temporizador"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoTemporizadorAgua())
+                }
+                "aguaCanciones" -> {
+                    opcion.text = "Canciones"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoHerramientasAgua())
+                }
+                "aguaLitros" -> {
+                    opcion.text = "Litros Usados"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
+                }
 
-                "reciclajeInicio" -> adaptador = AdaptadorPosts(this,cargarCatalogoInicioPlantas())
-                "reciclajeFavoritos" -> adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
-                "reciclajeMispost" -> adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
-                "reciclajeReciclaje" -> adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                "reciclajeInicio" -> {
+                    opcion.text = "Inicio"
+                    adaptador = AdaptadorPosts(this,posts)
+                }
+                "reciclajeFavoritos" -> {
+                    opcion.text = "Favoritos"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                }
+                "reciclajeMispost" -> {
+                    opcion.text = "Mis Posts"
+                    adaptador = AdaptadorPosts(this,posts)
+                }
+                "reciclajeReciclaje" -> {
+                    opcion.text = "Reciclaje"
+                    adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                }
 
             }
 
@@ -52,15 +88,25 @@ class PantallaPost : AppCompatActivity() {
 
 
         botonAgregar.setOnClickListener{
+            /*
             var intento: Intent = Intent(this, AgregarPost::class.java)
             startActivity(intento)
-
-        }
+             */
+            var intento: Intent = Intent(this, AgregarPost::class.java)
+            startActivityForResult(intento,1)
+        }/*
         refrescar.setOnClickListener {
             this.finish()
             startActivity(this.intent)
         }
+        */
         listaPost.adapter = adaptador
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        this.finish()
+        startActivity(this.intent)
     }
 
     fun cargarCatalogoInicioPlantas():ArrayList<Post> {

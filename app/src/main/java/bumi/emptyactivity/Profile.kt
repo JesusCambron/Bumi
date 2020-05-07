@@ -25,7 +25,6 @@ class Profile : AppCompatActivity() {
             finish()
         }
 
-
         botonPlantas.setOnClickListener {
             intento.putExtra("type","plantas")
             startActivity(intento)
