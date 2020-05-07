@@ -180,10 +180,13 @@
 
     <Button
         android:id="@+id/boton_cerrarsesion"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Cerrar Sesion">
+        android:text="Cerrar Sesion"
+        android:textColor="@color/blanco"
+        android:background="@drawable/circle">
 
     </Button>
 </LinearLayout>

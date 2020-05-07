@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "12738354879",
+    "firebase_url": "https://bumi-1587498987456.firebaseio.com",
+    "project_id": "bumi-1587498987456",
+    "storage_bucket": "bumi-1587498987456.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12738354879:android:e47120a435582224be700a",
+        "android_client_info": {
+          "package_name": "bumi.emptyactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12738354879-9uaaksreijucbo045okurm222upfud5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bumi.emptyactivity",
+            "certificate_hash": "77b0dc3cfc261a7c390c159fcc14c2a21e59bb2f"
+          }
+        },
+        {
+          "client_id": "12738354879-hldguu0odtstht5hl8unn17tcfj08n4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY3zQ6QHZjk9if-oOMu_b2xpy9Pc4TWN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12738354879-hldguu0odtstht5hl8unn17tcfj08n4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
