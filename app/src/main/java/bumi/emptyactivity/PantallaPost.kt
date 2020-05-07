@@ -3,6 +3,7 @@ package bumi.emptyactivity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,8 @@ class PantallaPost : AppCompatActivity() {
         var posts = ArrayList<Post>()
     }
 
+    var tipo:String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_post)
@@ -29,8 +32,10 @@ class PantallaPost : AppCompatActivity() {
         var adaptador:AdaptadorPosts? = null
 
         if(bundle != null) {
-            val type = bundle.getString("tipo")
-            when(type){
+            tipo = bundle.getString("tipo")
+            var cargar = cargarPost()
+
+            when(tipo){
                 "plantasInicio" -> {
                     adaptador = AdaptadorPosts(this,posts)
                     opcion.text = "Inicio"
@@ -86,7 +91,6 @@ class PantallaPost : AppCompatActivity() {
 
         }
 
-
         botonAgregar.setOnClickListener{
             /*
             var intento: Intent = Intent(this, AgregarPost::class.java)
@@ -107,6 +111,16 @@ class PantallaPost : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         this.finish()
         startActivity(this.intent)
+    }
+
+    inner class cargarPost : AsyncTask<Void,Void,Void>(){
+        override fun onPostExecute(result: Void?) {
+        }
+        override fun doInBackground(vararg params: Void?): Void? {
+            Log.i("tarea","haciendo tarea")
+
+            return null
+        }
     }
 
     fun cargarCatalogoInicioPlantas():ArrayList<Post> {
