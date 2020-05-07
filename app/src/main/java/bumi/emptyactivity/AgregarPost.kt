@@ -2,14 +2,12 @@ package bumi.emptyactivity
 
 import android.app.Activity
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageButton
+import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import data.Post
 import kotlinx.android.synthetic.main.activity_agregar_post.*
@@ -37,6 +35,7 @@ class AgregarPost : AppCompatActivity() {
         })
 
         videoButton.setOnClickListener(View.OnClickListener {
+            /*
             if (Build.VERSION.SDK_INT <= 19) {
                 val i = Intent()
                 i.type = "video/*"
@@ -50,6 +49,13 @@ class AgregarPost : AppCompatActivity() {
                 )
                 startActivityForResult(intent, VIDEO_PICK_CODE)
             }
+            */
+             */
+            val intent = Intent()
+            intent.type = "video/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), VIDEO_PICK_CODE)
+            tipo = "Video"
         })
 
         var botonGif:ImageButton = findViewById(R.id.botonGif) as ImageButton
@@ -87,26 +93,16 @@ class AgregarPost : AppCompatActivity() {
 
                 }
                 VIDEO_PICK_CODE -> {
-                    val selectedVideoUri: Uri = data!!.data!!
-                    val selectedVideoPath: String? = getRealPathFromURI(selectedVideoUri)
-                    textv.text = selectedVideoPath
+                    val mVideoURI = data!!.data
+                    pre.setVideoURI(mVideoURI)
+                /*MediaController mediaController = new MediaController(this);
+                        mediaController.setAnchorView(videoView);
+                        videoView.setMediaController(mediaController);*/
+                    pre.start()
                 }
 
         }
     }
 
-    fun getRealPathFromURI(uri: Uri): String? {
-        var cursor: Cursor? = null
-        return try {
-            val proj =
-                arrayOf(MediaStore.Images.Media.DATA)
-            cursor = this.getContentResolver().query(uri, proj, null, null, null)
-            val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            cursor.moveToFirst()
-            cursor.getString(column_index)
-        } finally {
-            cursor?.close()
-        }
-    }
 
 }

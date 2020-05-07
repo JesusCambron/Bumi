@@ -33,7 +33,7 @@
         <GridView
             android:id="@+id/listaPost"
             android:layout_width="match_parent"
-            android:layout_height="286dp"
+            android:layout_height="450dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:numColumns="1" />
@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="refrescar">
         </Button>
+        https://es.stackoverflow.com/questions/110038/seleccionar-item-autom%C3%A1ticamente-en-listview
         -->
         <Button
             android:id="@+id/botonAgregar"

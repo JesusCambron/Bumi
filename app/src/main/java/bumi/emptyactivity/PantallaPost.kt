@@ -3,14 +3,14 @@ package bumi.emptyactivity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
 import kotlinx.android.synthetic.main.post_view.view.*
@@ -328,6 +328,11 @@ class PantallaPost : AppCompatActivity() {
             vista.tv_title.setText(option.tipo)
             vista.image.setImageBitmap(option.image)
             vista.descripcion.setText(option.descripcion)
+
+            vista.image.setOnLongClickListener(OnLongClickListener { //Pulsación larga
+                Toast.makeText(contexto, "YIAUAUUA", Toast.LENGTH_SHORT).show()
+                false
+            })
 
             return vista
         }
