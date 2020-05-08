@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import data.Post
@@ -326,20 +327,36 @@ class PantallaPost : AppCompatActivity() {
             var vista = inflator.inflate(R.layout.post_view, null)
 
             if(option.tipo.equals("Imagen")){
-                vista.video.visibility = INVISIBLE
+                vista.videof.visibility = INVISIBLE
+                vista.image.visibility = VISIBLE
                 vista.image.setImageURI(option.image)
             } else {
-                vista.video.visibility = VISIBLE
-                vista.video.setVideoURI(option.image)
+                vista.videof.visibility = VISIBLE
+                vista.image.visibility = INVISIBLE
+                vista.videof.setVideoURI(option.image)
+                vista.tv_title.setOnClickListener {
+                    var media:MediaController = MediaController(contexto)
+                    media.setAnchorView(vista.videof)
+                    vista.videof.setMediaController(media)
+                    vista.videof.start()
+
+                    /*MediaController mediaController = new MediaController(this);
+                        mediaController.setAnchorView(videoView);
+                        videoView.setMediaController(mediaController);
+                    pre.start()*/
+                }
+
             }
             vista.tv_title.setText(option.tipo)
 
             vista.descripcion.setText(option.descripcion)
-
+/*
             vista.image.setOnLongClickListener(OnLongClickListener { //Pulsación larga
                 Toast.makeText(contexto, "YIAUAUUA", Toast.LENGTH_SHORT).show()
                 false
             })
+
+ */
 
             return vista
         }
