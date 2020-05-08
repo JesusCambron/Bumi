@@ -70,13 +70,15 @@
     <ImageView
         android:id="@+id/preimagen"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/awa"/>
+        android:layout_height="100dp"/>
         -->
+
+    <!--
     <VideoView
         android:id="@+id/pre"
         android:layout_width="wrap_content"
         android:layout_height="100dp"/>
+        -->
 
 
     <Button

@@ -3,6 +3,7 @@ package bumi.emptyactivity
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -20,7 +21,7 @@ class AgregarPost : AppCompatActivity() {
     val VIDEO_PICK_CODE: Int = 999
     val PERMISSION_CODE: Int = 1001
     var tipo:String = ""
-    var IMAGEN:Bitmap? = null
+    var MEDIA: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,7 @@ class AgregarPost : AppCompatActivity() {
         }
 
         botonPost.setOnClickListener {
-            PantallaPost.posts.add(0,Post(tipo,IMAGEN, fname.text.toString()))
+            PantallaPost.posts.add(0,Post(tipo,MEDIA, fname.text.toString()))
             this.finish()
             val returnIntent = Intent()
             setResult(Activity.RESULT_CANCELED, returnIntent)
@@ -87,18 +88,18 @@ class AgregarPost : AppCompatActivity() {
         if (resultCode === Activity.RESULT_OK)
             when (requestCode) {
                 IMAG_PICK_CODE -> {
-                    val imageUri = data!!.data
-                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
-                    IMAGEN = bitmap
-
+                    MEDIA = data!!.data
+                    //preimagen.setImageURI(imageUri)
+                    //val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+                    //IMAGEN = bitmap
                 }
                 VIDEO_PICK_CODE -> {
-                    val mVideoURI = data!!.data
-                    pre.setVideoURI(mVideoURI)
+                    MEDIA = data!!.data
+                    //pre.setVideoURI(mVideoURI)
                 /*MediaController mediaController = new MediaController(this);
                         mediaController.setAnchorView(videoView);
-                        videoView.setMediaController(mediaController);*/
-                    pre.start()
+                        videoView.setMediaController(mediaController);
+                    pre.start()*/
                 }
 
         }

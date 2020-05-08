@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnLongClickListener
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
@@ -37,32 +37,32 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "plantasFavoritos" -> {
                     opcion.text = "Favoritos"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
                 }
                 "plantasDestacados" -> {
                     opcion.text = "Destacados"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
                 }
                 "plantasMisPlantas" -> {
                     opcion.text = "Mis Plantas"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
                 }
 
                 "aguaConsejos" -> {
                     opcion.text = "Consejos"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
                 }
                 "aguaTemporizador" -> {
                     opcion.text = "Temporizador"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoTemporizadorAgua())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoTemporizadorAgua())
                 }
                 "aguaCanciones" -> {
                     opcion.text = "Canciones"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoHerramientasAgua())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoHerramientasAgua())
                 }
                 "aguaLitros" -> {
                     opcion.text = "Litros Usados"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
                 }
 
                 "reciclajeInicio" -> {
@@ -71,7 +71,7 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "reciclajeFavoritos" -> {
                     opcion.text = "Favoritos"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
                 }
                 "reciclajeMispost" -> {
                     opcion.text = "Mis Posts"
@@ -79,7 +79,7 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "reciclajeReciclaje" -> {
                     opcion.text = "Reciclaje"
-                    adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
                 }
 
             }
@@ -108,7 +108,7 @@ class PantallaPost : AppCompatActivity() {
         this.finish()
         startActivity(this.intent)
     }
-
+/*
     fun cargarCatalogoInicioPlantas():ArrayList<Post> {
         var lista = ArrayList<Post>()
         lista.add(
@@ -308,7 +308,7 @@ class PantallaPost : AppCompatActivity() {
             )
         )
         return lista
-    }
+    }*/
 
 
 
@@ -325,8 +325,15 @@ class PantallaPost : AppCompatActivity() {
             var inflator = LayoutInflater.from(contexto)
             var vista = inflator.inflate(R.layout.post_view, null)
 
+            if(option.tipo.equals("Imagen")){
+                vista.video.visibility = INVISIBLE
+                vista.image.setImageURI(option.image)
+            } else {
+                vista.video.visibility = VISIBLE
+                vista.video.setVideoURI(option.image)
+            }
             vista.tv_title.setText(option.tipo)
-            vista.image.setImageBitmap(option.image)
+
             vista.descripcion.setText(option.descripcion)
 
             vista.image.setOnLongClickListener(OnLongClickListener { //Pulsación larga
