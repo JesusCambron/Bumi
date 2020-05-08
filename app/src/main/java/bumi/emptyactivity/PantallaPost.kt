@@ -2,8 +2,10 @@ package bumi.emptyactivity
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -11,12 +13,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.google.firebase.database.*
 import com.google.firebase.storage.StorageReference
+import data.Datos
 import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
 import kotlinx.android.synthetic.main.post_view.view.*
+
 
 class PantallaPost : AppCompatActivity() {
 
@@ -31,8 +36,13 @@ class PantallaPost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_post)
 
+        dataBase = FirebaseDatabase.getInstance().getReference()
+
         val bundle = intent.extras
         var adaptador:AdaptadorPosts? = null
+
+        val pathReference = storage?.child("images/1588925908260.png")
+
 
         if(bundle != null) {
             val type = bundle.getString("tipo")
@@ -100,8 +110,40 @@ class PantallaPost : AppCompatActivity() {
         listaPost.adapter = adaptador
     }
 
-    fun cargarPosts(){
+   override fun onStart() {
+        super.onStart()
+       dataBase!!.child("Posts").addChildEventListener(object :ChildEventListener{
+           override fun onCancelled(p0: DatabaseError) {
+               TODO("Not yet implemented")
+           }
 
+           override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+               var data: Datos? = p0.getValue(Datos::class.java)
+               if (data != null) {
+                   data.key = p0.key
+               }
+               if (data != null) {
+                   data.tipo?.let { data.descripcion?.let { it1 -> Post(it,Uri.parse("gs://bumi-1587498987456.appspot.com/Images/1588925908260.png"), it1) } }?.let {
+                       posts.add(
+                           it
+                       )
+                   }
+               }
+           }
+           override fun onChildRemoved(p0: DataSnapshot) {
+               TODO("Not yet implemented")
+           }
+
+
+       })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

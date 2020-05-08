@@ -5,6 +5,7 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.EditText
@@ -81,10 +82,11 @@ class AgregarPost : AppCompatActivity() {
 
         botonGif.setOnClickListener {
             tipo = "Gif"
+            Log.i("uri",imgUri.toString())
         }
 
         botonPost.setOnClickListener {
-            PantallaPost.posts.add(0,Post(tipo,imgUri, fname.text.toString()))
+            //PantallaPost.posts.add(0,Post(tipo,imgUri, fname.text.toString()))
             if(tipo == "Imagen"){
                 dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                 storage = FirebaseStorage.getInstance().getReference("Images")
