@@ -11,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.StorageReference
 import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
 import kotlinx.android.synthetic.main.post_view.view.*
@@ -21,6 +24,8 @@ class PantallaPost : AppCompatActivity() {
         var posts = ArrayList<Post>()
     }
 
+    var dataBase:DatabaseReference? = null
+    var storage: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,21 +92,16 @@ class PantallaPost : AppCompatActivity() {
 
         }
 
-
         botonAgregar.setOnClickListener{
-            /*
-            var intento: Intent = Intent(this, AgregarPost::class.java)
-            startActivity(intento)
-             */
             var intento: Intent = Intent(this, AgregarPost::class.java)
             startActivityForResult(intento,1)
-        }/*
-        refrescar.setOnClickListener {
-            this.finish()
-            startActivity(this.intent)
         }
-        */
+
         listaPost.adapter = adaptador
+    }
+
+    fun cargarPosts(){
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

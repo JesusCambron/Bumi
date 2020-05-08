@@ -1,19 +1,10 @@
 package bumi.emptyactivity
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Toast
-import data.Opcion
-import data.Post
 import kotlinx.android.synthetic.main.activity_opciones.*
-import kotlinx.android.synthetic.main.pantalla_opciones.view.*
 
 class Opciones : AppCompatActivity() {
 
