@@ -79,8 +79,15 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"/>
         -->
+    <ProgressBar
+        android:id="@+id/progressPost"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal">
 
-
+    </ProgressBar>
     <Button
         android:id="@+id/botonPost"
         android:layout_marginTop="30dp"
