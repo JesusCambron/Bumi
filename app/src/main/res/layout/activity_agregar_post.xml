@@ -70,19 +70,6 @@
     <ImageView
         android:id="@+id/preimagen"
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="100dp"
-        android:src="@drawable/awa"/>
-        -->
-    <TextView
-        android:id="@+id/textv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="JAJAJAJJA"/>
-
-    <Button
-        android:id="@+id/botonAgregar"
-=======
         android:layout_height="100dp"/>
         -->
 
@@ -103,7 +90,6 @@
     </ProgressBar>
     <Button
         android:id="@+id/botonPost"
->>>>>>> master
         android:layout_marginTop="30dp"
         android:layout_width="130dp"
         android:layout_height="50dp"
