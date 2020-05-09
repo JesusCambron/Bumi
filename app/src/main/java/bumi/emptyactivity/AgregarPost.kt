@@ -121,7 +121,7 @@ class AgregarPost : AppCompatActivity() {
         datos?.tipo = tipo
         datos?.imageId = " "
         datos?.descripcion = fname.text.toString()
-        datos?.favorito = false
+        //datos?.favorito = false
 
 
         var ref:StorageReference = storage!!.child(imgId)
