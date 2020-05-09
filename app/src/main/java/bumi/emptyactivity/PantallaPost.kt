@@ -6,12 +6,16 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
@@ -100,6 +104,35 @@ class PantallaPost : AppCompatActivity() {
             }
 
         }
+
+        var nPrevSelGridItem = -1
+        listaPost.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            var viewPrev: View? = null
+            override fun onItemClick(
+                parent: AdapterView<*>?, view: View,
+                position: Int, id: Long
+            ) {
+                try {
+                    botonAgregar.setText("position = " + position)
+/*
+                    if (nPrevSelGridItem != -1) {
+                        viewPrev = listaPost.getChildAt(nPrevSelGridItem)
+                        viewPrev!!.setBackgroundColor(Color.WHITE)
+                    }
+
+                    nPrevSelGridItem = position
+                    if (nPrevSelGridItem == position) {
+                        //View viewPrev = (View) gridview.getChildAt(nPrevSelGridItem);
+                        //Toast.makeText(this, "NIA", Toast.LENGTH_LONG).show()
+                        view.setBackgroundColor(Color.BLACK);
+                    }
+
+ */
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        })
 
         botonAgregar.setOnClickListener{
             var intento: Intent = Intent(this, AgregarPost::class.java)
@@ -383,22 +416,56 @@ class PantallaPost : AppCompatActivity() {
             var vista = inflator.inflate(R.layout.post_view, null)
 
             if(option.tipo.equals("Imagen")){
-                vista.video.visibility = INVISIBLE
+                vista.videof.visibility = INVISIBLE
+                vista.image.visibility = VISIBLE
                 var task = obtenerImagen()
                 var image = task.execute(option).get()
                 vista.image.setImageBitmap(image)
             } else {
-                vista.video.visibility = VISIBLE
+                vista.videof.visibility = VISIBLE
+                vista.image.visibility = INVISIBLE
+                //vista.videof.setVideoURI(option.image)
+                //------------------------------------------------------------------------
+                var media:MediaController = MediaController(contexto)
+                media.setAnchorView(vista.videof)
+                vista.videof.setMediaController(media)
                 //vista.video.setVideoURI(option.image)
             }
             vista.tv_title.setText(option.tipo)
 
             vista.descripcion.setText(option.descripcion)
+            var seleccionfavorito: Boolean = false
+            var seleccionDestacado: Boolean = false
+//Agrega un post a favoritos
+            vista.favoritos.setOnClickListener {
+                seleccionfavorito = !seleccionfavorito
+                if(seleccionfavorito){
+                    vista.favoritos.setImageResource(R.drawable.ic_star_black_24dp)
+                    Toast.makeText(contexto, "Agregado a favoritos", Toast.LENGTH_SHORT).show()
+                } else {
+                    vista.favoritos.setImageResource(R.drawable.ic_star_border_black_24dp)
+                    Toast.makeText(contexto, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                }
 
+            }
+
+            vista.destacado.setOnClickListener {
+                seleccionDestacado = !seleccionDestacado
+                if(seleccionDestacado){
+                    vista.destacado.setImageResource(R.drawable.ic_whatshot1_black_24dp)
+                    Toast.makeText(contexto, "Agregado a destacados", Toast.LENGTH_SHORT).show()
+                } else {
+                    vista.destacado.setImageResource(R.drawable.ic_whatshot0_black_24dp)
+                    Toast.makeText(contexto, "Eliminado de destacados", Toast.LENGTH_SHORT).show()
+                }
+            }
+/*
             vista.image.setOnLongClickListener(OnLongClickListener { //Pulsación larga
                 Toast.makeText(contexto, "YIAUAUUA", Toast.LENGTH_SHORT).show()
                 false
             })
+
+ */
 
             return vista
         }
