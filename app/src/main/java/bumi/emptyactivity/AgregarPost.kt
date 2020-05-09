@@ -89,7 +89,10 @@ class AgregarPost : AppCompatActivity() {
                 dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                 storage = FirebaseStorage.getInstance().getReference("Images")
                 uploadFile()
-                /*guardarPostFirebase()*/
+            }else{
+                dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
+                storage = FirebaseStorage.getInstance().getReference("Videos")
+                uploadFile()
             }
             this.finish()
             val returnIntent = Intent()
