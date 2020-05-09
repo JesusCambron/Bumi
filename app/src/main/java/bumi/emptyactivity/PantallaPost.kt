@@ -1,11 +1,12 @@
 package bumi.emptyactivity
 
+import android.R.attr.src
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -13,14 +14,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
 import com.google.firebase.database.*
 import com.google.firebase.storage.StorageReference
 import data.Datos
 import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
 import kotlinx.android.synthetic.main.post_view.view.*
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class PantallaPost : AppCompatActivity() {
@@ -40,9 +42,6 @@ class PantallaPost : AppCompatActivity() {
 
         val bundle = intent.extras
         var adaptador:AdaptadorPosts? = null
-
-        val pathReference = storage?.child("images/1588925908260.png")
-
 
         if(bundle != null) {
             val type = bundle.getString("tipo")
@@ -131,11 +130,8 @@ class PantallaPost : AppCompatActivity() {
                    data.key = p0.key
                }
                if (data != null) {
-                   data.tipo?.let { data.descripcion?.let { it1 -> Post(it,Uri.parse("gs://bumi-1587498987456.appspot.com/Images/1588925908260.png"), it1) } }?.let {
-                       posts.add(
-                           it
-                       )
-                   }
+                   var uri:String? = data.imageId
+                   data.descripcion?.let { data.tipo?.let { it1 -> Post(it1,uri, it) } }?.let { posts.add(it) }
                }
            }
            override fun onChildRemoved(p0: DataSnapshot) {
@@ -354,8 +350,26 @@ class PantallaPost : AppCompatActivity() {
     }*/
 
 
+    inner class obtenerImagen : AsyncTask<Post,Void,Bitmap>(){
 
-    private class AdaptadorPosts: BaseAdapter {
+        override fun onPostExecute(result: Bitmap?) {
+            //View.image.setImageBitmap(image)
+        }
+
+        override fun doInBackground(vararg params: Post?): Bitmap? {
+            var post:Post? = params.get(0)
+            val url = URL(post?.image)
+            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            connection.setDoInput(true)
+            connection.connect()
+            val input: InputStream = connection.getInputStream()
+            var bitmap = BitmapFactory.decodeStream(input)
+            input.close()
+            return bitmap
+        }
+    }
+
+    inner class AdaptadorPosts: BaseAdapter {
         var contexto: Context? = null
         var opciones = ArrayList<Post>()
 
@@ -370,10 +384,12 @@ class PantallaPost : AppCompatActivity() {
 
             if(option.tipo.equals("Imagen")){
                 vista.video.visibility = INVISIBLE
-                vista.image.setImageURI(option.image)
+                var task = obtenerImagen()
+                var image = task.execute(option).get()
+                vista.image.setImageBitmap(image)
             } else {
                 vista.video.visibility = VISIBLE
-                vista.video.setVideoURI(option.image)
+                //vista.video.setVideoURI(option.image)
             }
             vista.tv_title.setText(option.tipo)
 

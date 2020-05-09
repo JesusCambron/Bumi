@@ -13,15 +13,15 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import data.Datos
-import data.Post
 import kotlinx.android.synthetic.main.activity_agregar_post.*
+import kotlinx.android.synthetic.main.post_view.*
 
 
 class AgregarPost : AppCompatActivity() {
@@ -46,7 +46,6 @@ class AgregarPost : AppCompatActivity() {
         videoButton = findViewById(R.id.botonVideo)
         text = findViewById(R.id.texto)
         datos = Datos()
-        //progressBar = findViewById(R.id.progressPost)
 
 
         imageButton?.setOnClickListener(View.OnClickListener {
@@ -82,7 +81,6 @@ class AgregarPost : AppCompatActivity() {
 
         botonGif.setOnClickListener {
             tipo = "Gif"
-            Log.i("uri",imgUri.toString())
         }
 
         botonPost.setOnClickListener {
@@ -91,6 +89,7 @@ class AgregarPost : AppCompatActivity() {
                 dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                 storage = FirebaseStorage.getInstance().getReference("Images")
                 uploadFile()
+                /*guardarPostFirebase()*/
             }
             this.finish()
             val returnIntent = Intent()
@@ -105,24 +104,50 @@ class AgregarPost : AppCompatActivity() {
         var mimeTypeMap = MimeTypeMap.getSingleton()
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri))
     }
+    /*private fun guardarPostFirebase(){
+        var imgId = System.currentTimeMillis().toString()+"."+ imgUri?.let { getExtension(it) }
+        datos?.tipo = tipo
+        datos?.imageId = " "
+        datos?.descripcion = fname.text.toString()
+        datos?.favorito = false
+        var postReference = dataBase?.push()
+        postReference?.setValue(datos)
+        var key = postReference?.key
+        postReference?.key
+
+    }*/
+
     private fun uploadFile(){
         var imgId = System.currentTimeMillis().toString()+"."+ imgUri?.let { getExtension(it) }
         datos?.tipo = tipo
+        datos?.imageId = " "
         datos?.descripcion = fname.text.toString()
-        datos?.imageId = imgId
-        dataBase?.push()?.setValue(datos)
+        datos?.favorito = false
+
+
         var ref:StorageReference = storage!!.child(imgId)
-        imgUri?.let {
-            ref.putFile(it)
-                .addOnSuccessListener(OnSuccessListener<UploadTask.TaskSnapshot> {   // Get a URL to the uploaded content
-                    //val downloadUrl: Uri = taskSnapshot.getDownloadUrl()
-                    Toast.makeText(this,"Imagen subida",Toast.LENGTH_SHORT).show()
-                })
-                .addOnFailureListener(OnFailureListener {
-                    // Handle unsuccessful uploads
-                    Toast.makeText(this,"La imagen no ha podido ser subida",Toast.LENGTH_SHORT).show()
-                })
+
+        var uploadTask: UploadTask? = imgUri?.let { ref.putFile(it) }
+
+        uploadTask!!.addOnSuccessListener { taskSnapshot -> // this is where we will end up if our image uploads successfully.
+            val snapshotMetadata = taskSnapshot.metadata
+            val downloadUrl: Task<Uri> = ref.downloadUrl
+            downloadUrl.addOnSuccessListener { uri ->
+                var imageReference = uri
+                Log.i("img",imageReference.toString())
+                datos?.imageId = imageReference.toString()
+                var postReference = dataBase?.push()
+                postReference?.setValue(datos)
+                Toast.makeText(this,"Imagen subida",Toast.LENGTH_SHORT).show()
+            }
         }
+        uploadTask.addOnFailureListener(OnFailureListener {
+            Toast.makeText(this,"La imagen no ha podido ser subida", Toast.LENGTH_SHORT).show()
+        })
+
+
+
+
     }
 
     private fun pickFromGallery() {
