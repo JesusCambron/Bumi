@@ -66,8 +66,17 @@
             android:background="@drawable/circle_blue"
             android:textColor="@color/blanco">
         </Button>
+        <Button
+            android:id="@+id/guardarBoton"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/ebrima"
+            android:text="Guardar Tiempo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/circle_blue"
+            android:textColor="@color/blanco">
+        </Button>
     </LinearLayout>
-
-
-
 </LinearLayout>
