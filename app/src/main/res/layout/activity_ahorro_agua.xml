@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AhorroAgua"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:id="@+id/pregunta"
+        android:textSize="16sp"
+        android:text="Ahorro de agua"
+        android:textAlignment="viewStart"
+        android:paddingLeft="15dp"
+        android:paddingTop="7dp"
+        android:background="@drawable/circle"
+        android:textColor="@color/blanco"
+        android:fontFamily="@font/ebrima"
+        android:textStyle="bold"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="25dp">
+    </TextView>
+    <GridLayout
+        android:layout_marginTop="1dp"
+        android:paddingHorizontal="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/circle">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginBottom="300dp"
+            android:fontFamily="@font/ebrima"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Aproximandamente, ¿cuánto tiempo sueles tardar al ducharte?"
+            android:textColor="@color/blanco"
+            android:textSize="25dp"
+            android:textStyle="bold">
+        </TextView>
+    </GridLayout>
+    <EditText
+        android:id="@+id/cantidadMinutos"
+        android:hint="Ingresa la cantidad en minutos"
+        android:textSize="25dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:layout_width="300dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/textbox"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        />
+
+    <Button
+        android:id="@+id/botonAceptar"
+        android:layout_marginTop="30dp"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Aceptar"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:textColor="@color/blanco"
+        android:background="@drawable/circle"/>
+
+
+</LinearLayout>

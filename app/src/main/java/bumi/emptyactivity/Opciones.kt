@@ -1,20 +1,23 @@
 package bumi.emptyactivity
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.activity_opciones.*
+<<<<<<< HEAD
 import kotlinx.android.synthetic.main.pantalla_opciones.view.*
 import data.Post
 import data.Opcion
 
 class Opciones : AppCompatActivity() {
 
+=======
+
+class Opciones : AppCompatActivity() {
+
+
+>>>>>>> master
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opciones)
@@ -114,6 +117,7 @@ class Opciones : AppCompatActivity() {
             }
         }
         //listaOpciones.adapter= adaptador
+<<<<<<< HEAD
     }
 
 
@@ -154,5 +158,54 @@ class Opciones : AppCompatActivity() {
     override fun getCount(): Int {
     return opciones.size
     }
+=======
+    }
+
+
+    /**private class AdaptadorOpciones: BaseAdapter {
+        var contexto: Context? = null
+        var opciones = ArrayList<Opcion>()
+        constructor(context: Context, opciones:ArrayList<Opcion>){
+            this.contexto=context
+            this.opciones = opciones
+        }
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            var option = opciones[position]
+            //var inflator = LayoutInflater.from(contexto)
+            var inflator = contexto!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            var vista = inflator.inflate(R.layout.pantalla_opciones, null)
+
+
+            vista.botonOpcion.setText(option.opcion)
+
+            if(option.opcion.equals("Temporizador")) {
+                vista.botonOpcion.setOnClickListener{
+                    var intentoReloj: Intent = Intent(contexto, Reloj::class.java)
+                    contexto!!.startActivity(intentoReloj)
+                }
+            } else {
+                vista.botonOpcion.setOnClickListener{
+                    var intento = Intent(contexto,PantallaPost::class.java)
+                    intento.putExtra("opcion",option.opcion)
+                    intento.putExtra("catalogo",option.catalogo)
+                    contexto!!.startActivity(intento)
+                }
+            }
+            return vista
+        }
+
+        override fun getItem(position: Int): Any {
+            return opciones[position]
+        }
+
+        override fun getItemId(position: Int): Long {
+            return 1
+        }
+
+        override fun getCount(): Int {
+            return opciones.size
+        }
+
+>>>>>>> master
     }**/
 }

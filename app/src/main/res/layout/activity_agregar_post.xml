@@ -70,6 +70,7 @@
     <ImageView
         android:id="@+id/preimagen"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="100dp"
         android:src="@drawable/awa"/>
         -->
@@ -81,6 +82,28 @@
 
     <Button
         android:id="@+id/botonAgregar"
+=======
+        android:layout_height="100dp"/>
+        -->
+
+    <!--
+    <VideoView
+        android:id="@+id/pre"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"/>
+        -->
+    <ProgressBar
+        android:id="@+id/progressPost"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal">
+
+    </ProgressBar>
+    <Button
+        android:id="@+id/botonPost"
+>>>>>>> master
         android:layout_marginTop="30dp"
         android:layout_width="130dp"
         android:layout_height="50dp"

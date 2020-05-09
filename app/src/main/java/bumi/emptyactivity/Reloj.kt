@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_reloj.*
 
 class Reloj : AppCompatActivity() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     var encendido:Boolean = false
     var time:Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {

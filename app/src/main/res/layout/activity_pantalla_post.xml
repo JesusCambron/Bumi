@@ -22,22 +22,50 @@
         android:fontFamily="@font/ebrima"
         android:textStyle="bold"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="25dp">
+        android:layout_marginRight="15dp">
     </TextView>
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp">
+
         <GridView
             android:id="@+id/listaPost"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="1"
+            android:layout_height="450dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            />
+            android:numColumns="1" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+<!--
+        <Button
+            android:id="@+id/refrescar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="refrescar">
+        </Button>
+        https://es.stackoverflow.com/questions/110038/seleccionar-item-autom%C3%A1ticamente-en-listview
+        -->
+        <Button
+            android:id="@+id/botonAgregar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="+"
+
+            android:background="@color/colorPrimary"
+            android:textColor="@color/blanco"
+            android:layout_margin="10dp"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

@@ -2,19 +2,36 @@ package bumi.emptyactivity
 
 import android.content.Context
 import android.content.Intent
+<<<<<<< HEAD
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
+=======
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
+>>>>>>> master
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
+import android.widget.MediaController
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.google.firebase.database.*
+import com.google.firebase.storage.StorageReference
+import data.Datos
+import data.Post
 import kotlinx.android.synthetic.main.activity_pantalla_post.*
-import kotlinx.android.synthetic.main.activity_pantalla_post.view.*
-import kotlinx.android.synthetic.main.activity_pantalla_post.view.opcion
 import kotlinx.android.synthetic.main.post_view.view.*
 import data.Post
 import kotlinx.android.synthetic.main.activity_agregar_post.*
+
 
 class PantallaPost : AppCompatActivity() {
 
@@ -22,13 +39,30 @@ class PantallaPost : AppCompatActivity() {
         var posts = ArrayList<Post>()
     }
 
+<<<<<<< HEAD
+=======
+    var dataBase:DatabaseReference? = null
+    var storage: StorageReference? = null
+
+>>>>>>> master
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_post)
 
+<<<<<<< HEAD
         val bundle = intent.extras
         var adaptador:AdaptadorPosts? = null
 
+=======
+        dataBase = FirebaseDatabase.getInstance().getReference()
+
+        val bundle = intent.extras
+        var adaptador:AdaptadorPosts? = null
+
+        val pathReference = storage?.child("images/1588925908260.png")
+
+
+>>>>>>> master
         if(bundle != null) {
             val type = bundle.getString("tipo")
             when(type){
@@ -38,6 +72,7 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "plantasFavoritos" -> {
                     opcion.text = "Favoritos"
+<<<<<<< HEAD
                     adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
                 }
                 "plantasDestacados" -> {
@@ -47,10 +82,22 @@ class PantallaPost : AppCompatActivity() {
                 "plantasMisPlantas" -> {
                     opcion.text = "Mis Plantas"
                     adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+=======
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                }
+                "plantasDestacados" -> {
+                    opcion.text = "Destacados"
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
+                }
+                "plantasMisPlantas" -> {
+                    opcion.text = "Mis Plantas"
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+>>>>>>> master
                 }
 
                 "aguaConsejos" -> {
                     opcion.text = "Consejos"
+<<<<<<< HEAD
                     adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
                 }
                 "aguaTemporizador" -> {
@@ -64,6 +111,21 @@ class PantallaPost : AppCompatActivity() {
                 "aguaLitros" -> {
                     opcion.text = "Litros Usados"
                     adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
+=======
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoConsejosAgua())
+                }
+                "aguaTemporizador" -> {
+                    opcion.text = "Temporizador"
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoTemporizadorAgua())
+                }
+                "aguaCanciones" -> {
+                    opcion.text = "Canciones"
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoHerramientasAgua())
+                }
+                "aguaLitros" -> {
+                    opcion.text = "Litros Usados"
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoLitrosAhorradosAgua())
+>>>>>>> master
                 }
 
                 "reciclajeInicio" -> {
@@ -72,7 +134,11 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "reciclajeFavoritos" -> {
                     opcion.text = "Favoritos"
+<<<<<<< HEAD
                     adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+=======
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+>>>>>>> master
                 }
                 "reciclajeMispost" -> {
                     opcion.text = "Mis Posts"
@@ -80,13 +146,18 @@ class PantallaPost : AppCompatActivity() {
                 }
                 "reciclajeReciclaje" -> {
                     opcion.text = "Reciclaje"
+<<<<<<< HEAD
                     adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+=======
+                    //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+>>>>>>> master
                 }
 
             }
 
         }
 
+<<<<<<< HEAD
 
         botonAgregar.setOnClickListener{
             /*
@@ -273,6 +344,250 @@ class PantallaPost : AppCompatActivity() {
         return lista
     }
 
+=======
+        var nPrevSelGridItem = -1
+        listaPost.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            var viewPrev: View? = null
+            override fun onItemClick(
+                parent: AdapterView<*>?, view: View,
+                position: Int, id: Long
+            ) {
+                try {
+                    botonAgregar.setText("position = " + position)
+/*
+                    if (nPrevSelGridItem != -1) {
+                        viewPrev = listaPost.getChildAt(nPrevSelGridItem)
+                        viewPrev!!.setBackgroundColor(Color.WHITE)
+                    }
+
+                    nPrevSelGridItem = position
+                    if (nPrevSelGridItem == position) {
+                        //View viewPrev = (View) gridview.getChildAt(nPrevSelGridItem);
+                        //Toast.makeText(this, "NIA", Toast.LENGTH_LONG).show()
+                        view.setBackgroundColor(Color.BLACK);
+                    }
+
+ */
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        })
+
+        botonAgregar.setOnClickListener{
+            var intento: Intent = Intent(this, AgregarPost::class.java)
+            startActivityForResult(intento,1)
+        }
+
+        listaPost.adapter = adaptador
+    }
+
+   override fun onStart() {
+        super.onStart()
+       dataBase!!.child("Posts").addChildEventListener(object :ChildEventListener{
+           override fun onCancelled(p0: DatabaseError) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+               var data: Datos? = p0.getValue(Datos::class.java)
+               if (data != null) {
+                   data.key = p0.key
+               }
+               if (data != null) {
+                   data.tipo?.let { data.descripcion?.let { it1 -> Post(it,Uri.parse("gs://bumi-1587498987456.appspot.com/Images/1588925908260.png"), it1) } }?.let {
+                       posts.add(
+                           it
+                       )
+                   }
+               }
+           }
+           override fun onChildRemoved(p0: DataSnapshot) {
+               TODO("Not yet implemented")
+           }
+
+
+       })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        this.finish()
+        startActivity(this.intent)
+    }
+/*
+    fun cargarCatalogoInicioPlantas():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoFavoritosPlantas():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoDestacadosPlantas():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoMisPlantas():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles"
+            )
+        )
+        return lista
+    }
+
+
+    fun cargarCatalogoConsejosAgua():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "Al bañarte rápido ahorras agua"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "La ducha debe durar entre 5 y 10 min maximo"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoTemporizadorAgua():ArrayList<Post> {
+        var lista = ArrayList<Post>()
+        /*
+        lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
+        lista.add(Post("Foto",R.drawable.agua_logo,"Tienes 5 minutos"))
+        */
+        return lista
+
+    }
+
+    fun cargarCatalogoHerramientasAgua():ArrayList<Post>{
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.sunflower),
+                "Sunflower By Post Malone ft. Swalee"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.awa),
+                "Whiskey in the jar By Metallica"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoLitrosAhorradosAgua():ArrayList<Post>{
+        var lista = ArrayList<Post>()
+        lista.add(Post("Foto", BitmapFactory.decodeResource(resources,R.drawable.awa), "Ahorro: 150Lts "))
+        return lista
+    }
+
+
+    fun cargarCatalogoInicioReciclaje():ArrayList<Post>{
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.reciclaje_logo),
+                "El reciclaje es lo máximo"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.reciclaje),
+                "El mundo puede recuperarse"
+            )
+        )
+        return lista
+    }
+
+    fun cargarCatalogoFavoritosReciclaje():ArrayList<Post>{
+        var lista = ArrayList<Post>()
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.reciclaje_logo),
+                "El reciclaje es lo máximo"
+            )
+        )
+        lista.add(
+            Post(
+                "Foto",
+                BitmapFactory.decodeResource(resources,R.drawable.reciclaje),
+                "El mundo puede recuperarse"
+            )
+        )
+        return lista
+    }
+
+>>>>>>> master
     fun cargarCatalogoDestacadosReciclaje():ArrayList<Post>{
         var lista = ArrayList<Post>()
         lista.add(
@@ -309,7 +624,11 @@ class PantallaPost : AppCompatActivity() {
             )
         )
         return lista
+<<<<<<< HEAD
     }
+=======
+    }*/
+>>>>>>> master
 
 
 
@@ -326,9 +645,76 @@ class PantallaPost : AppCompatActivity() {
             var inflator = LayoutInflater.from(contexto)
             var vista = inflator.inflate(R.layout.post_view, null)
 
+<<<<<<< HEAD
             vista.tv_title.setText(option.tipo)
             vista.image.setImageBitmap(option.image)
+=======
+            if(option.tipo.equals("Imagen")){
+                vista.videof.visibility = INVISIBLE
+                vista.image.visibility = VISIBLE
+                vista.image.setImageURI(option.image)
+            } else {
+                vista.videof.visibility = VISIBLE
+                vista.image.visibility = INVISIBLE
+                vista.videof.setVideoURI(option.image)
+                //------------------------------------------------------------------------
+                var media:MediaController = MediaController(contexto)
+                media.setAnchorView(vista.videof)
+                vista.videof.setMediaController(media)
+
+                /*
+                vista.tv_title.setOnClickListener {
+                    var media:MediaController = MediaController(contexto)
+                    media.setAnchorView(vista.videof)
+                    vista.videof.setMediaController(media)
+                    vista.videof.start()
+
+                    /*MediaController mediaController = new MediaController(this);
+                        mediaController.setAnchorView(videoView);
+                        videoView.setMediaController(mediaController);
+                    pre.start()*/
+                }
+
+                 */
+                //------------------------------------------------------------------------
+
+            }
+            vista.tv_title.setText(option.tipo)
+
+>>>>>>> master
             vista.descripcion.setText(option.descripcion)
+            var seleccionfavorito: Boolean = false
+            var seleccionDestacado: Boolean = false
+//Agrega un post a favoritos
+            vista.favoritos.setOnClickListener {
+                seleccionfavorito = !seleccionfavorito
+                if(seleccionfavorito){
+                    vista.favoritos.setImageResource(R.drawable.ic_star_black_24dp)
+                    Toast.makeText(contexto, "Agregado a favoritos", Toast.LENGTH_SHORT).show()
+                } else {
+                    vista.favoritos.setImageResource(R.drawable.ic_star_border_black_24dp)
+                    Toast.makeText(contexto, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            vista.destacado.setOnClickListener {
+                seleccionDestacado = !seleccionDestacado
+                if(seleccionDestacado){
+                    vista.destacado.setImageResource(R.drawable.ic_whatshot1_black_24dp)
+                    Toast.makeText(contexto, "Agregado a destacados", Toast.LENGTH_SHORT).show()
+                } else {
+                    vista.destacado.setImageResource(R.drawable.ic_whatshot0_black_24dp)
+                    Toast.makeText(contexto, "Eliminado de destacados", Toast.LENGTH_SHORT).show()
+                }
+            }
+/*
+            vista.image.setOnLongClickListener(OnLongClickListener { //Pulsación larga
+                Toast.makeText(contexto, "YIAUAUUA", Toast.LENGTH_SHORT).show()
+                false
+            })
+
+ */
 
             return vista
         }
