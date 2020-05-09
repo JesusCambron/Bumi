@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_opciones.*
 
 class Opciones : AppCompatActivity() {
@@ -19,9 +20,7 @@ class Opciones : AppCompatActivity() {
         if(bundle!=null){
             val type= bundle.getString("type")
             when(type) {
-
                 "plantas"->{
-
                     boton1.setText("Inicio")
                     boton2.setText("Favoritos")
                     boton3.setText("Destacados")

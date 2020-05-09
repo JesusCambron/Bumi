@@ -5,7 +5,8 @@ class Datos {
     var imageId:String? = null
     var descripcion:String? = null
     var key: String? = null
-    var mageUrl: String? = null
+    var favorito: Boolean? = null
+    var destacado: Boolean? = null
 
     constructor() {
 
