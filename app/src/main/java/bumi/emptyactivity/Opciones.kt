@@ -71,8 +71,8 @@ class Opciones : AppCompatActivity() {
                         startActivity(intentPost)
                     })
                     boton4.setOnClickListener(View.OnClickListener {
-                        var intentPost = Intent(this,PantallaPost::class.java)
-                        intentPost.putExtra("tipo","aguaLitros")
+                        var intentPost = Intent(this,AhorroAgua::class.java)
+                        //intentPost.putExtra("tipo","aguaLitros")
                         startActivity(intentPost)
                     })
                 }
