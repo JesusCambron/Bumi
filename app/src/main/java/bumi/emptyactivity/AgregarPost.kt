@@ -125,8 +125,8 @@ class AgregarPost : AppCompatActivity() {
         datos?.tipo = tipo
         datos?.imageId = " "
         datos?.descripcion = fname.text.toString()
-        datos?.favorito = false
-
+        datos?.favorito = "false"
+        datos?.destacado = "false"
 
         var ref:StorageReference = storage!!.child(imgId)
 
@@ -139,17 +139,19 @@ class AgregarPost : AppCompatActivity() {
                 var imageReference = uri
                 Log.i("img",imageReference.toString())
                 datos?.imageId = imageReference.toString()
-                var postReference = dataBase?.push()
-                postReference?.setValue(datos)
+
+                var postReference = dataBase?.push()?.key
+                datos?.id = postReference
+                Log.i("post",postReference)
+                if (postReference != null) {
+                    dataBase?.child(postReference)?.setValue(datos)
+                }
                 Toast.makeText(this,"Imagen subida",Toast.LENGTH_SHORT).show()
             }
         }
         uploadTask.addOnFailureListener(OnFailureListener {
             Toast.makeText(this,"La imagen no ha podido ser subida", Toast.LENGTH_SHORT).show()
         })
-
-
-
 
     }
 

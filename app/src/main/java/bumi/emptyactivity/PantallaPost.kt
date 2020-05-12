@@ -9,6 +9,7 @@ import android.os.AsyncTask
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -33,6 +34,8 @@ class PantallaPost : AppCompatActivity() {
 
     companion object{
         var posts = ArrayList<Post>()
+        var postFav = ArrayList<Post>()
+        var postDest = ArrayList<Post>()
     }
 
     var dataBase:DatabaseReference? = null
@@ -65,16 +68,57 @@ class PantallaPost : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 posts.clear()
+                postFav.clear()
+                postDest.clear()
                 val children = p0!!.children
                 // This returns the correct child count...
                 children.forEach {
                     var data: Datos? = it.getValue(Datos::class.java)
                     if (data != null) {
                         //data.favorito.equals("true")
-                        data.descripcion?.let { data.tipo?.let { it1 -> Post(it1,data.imageId, it) } }?.let { posts.add(it) }
+                        data.id?.let { it1 -> data.tipo?.let { it2 ->
+                            data.descripcion?.let { it3 ->
+                                data.favorito?.let { it4 ->
+                                    data.destacado?.let { it5 ->
+                                        Post(it1,
+                                            it2,data.imageId, it3, it4, it5
+                                        )
+                                    }
+                                }
+                            }
+                        } }
+                            ?.let { it2 -> posts.add(it2) }
+                        if(data.favorito.equals("true")){
+                            data.id?.let { it1 -> data.tipo?.let { it2 ->
+                                data.descripcion?.let { it3 ->
+                                    data.favorito?.let { it4 ->
+                                        data.destacado?.let { it5 ->
+                                            Post(it1,
+                                                it2,data.imageId, it3, it4, it5
+                                            )
+                                        }
+                                    }
+                                }
+                            } }
+                                ?.let { it2 -> postFav.add(it2) }
+                        }
+                        if(data.destacado.equals("true")){
+                            data.id?.let { it1 -> data.tipo?.let { it2 ->
+                                data.descripcion?.let { it3 ->
+                                    data.favorito?.let { it4 ->
+                                        data.destacado?.let { it5 ->
+                                            Post(it1,
+                                                it2,data.imageId, it3, it4, it5
+                                            )
+                                        }
+                                    }
+                                }
+                            } }
+                                ?.let { it2 -> postDest.add(it2) }
+                        }
                     }
                 }
-
+                posts.reverse()
                 if(bundle != null) {
                     val type = bundle.getString("tipo")
                     when(type){
@@ -84,11 +128,11 @@ class PantallaPost : AppCompatActivity() {
                         }
                         "plantasFavoritos" -> {
                             opcion.text = "Favoritos"
-                            //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                            adaptador = AdaptadorPosts(this@PantallaPost, postFav)
                         }
                         "plantasDestacados" -> {
                             opcion.text = "Destacados"
-                            //adaptador = AdaptadorPosts(this,cargarCatalogoDestacadosPlantas())
+                            adaptador = AdaptadorPosts(this@PantallaPost, postDest)
                         }
                         "plantasMisPlantas" -> {
                             opcion.text = "Mis Plantas"
@@ -118,11 +162,11 @@ class PantallaPost : AppCompatActivity() {
                         }
                         "reciclajeFavoritos" -> {
                             opcion.text = "Favoritos"
-                            //adaptador = AdaptadorPosts(this,cargarCatalogoFavoritosPlantas())
+                            adaptador = AdaptadorPosts(this@PantallaPost, postFav)
                         }
                         "reciclajeMispost" -> {
                             opcion.text = "Mis Posts"
-                            adaptador = AdaptadorPosts(this@PantallaPost,posts)
+                            adaptador = AdaptadorPosts(this@PantallaPost, postFav)
                         }
                         "reciclajeReciclaje" -> {
                             opcion.text = "Reciclaje"
@@ -285,27 +329,51 @@ class PantallaPost : AppCompatActivity() {
             vista.descripcion.setText(option.descripcion)
             var seleccionfavorito: Boolean = false
             var seleccionDestacado: Boolean = false
+            if (option.favorito.equals("true")){
+                vista.favoritos.setImageResource(R.drawable.ic_star_black_24dp)
+                seleccionfavorito = true
+            }
             //Agrega un post a favoritos
             vista.favoritos.setOnClickListener {
                 seleccionfavorito = !seleccionfavorito
                 if(seleccionfavorito){
                     vista.favoritos.setImageResource(R.drawable.ic_star_black_24dp)
                     Toast.makeText(contexto, "Agregado a favoritos", Toast.LENGTH_SHORT).show()
+                    //aqui asignar nuevo valor
+                    var referenciaPost = dataBase?.child(option.idPost)
+                    var referenciaFavorito = referenciaPost?.child("favorito")
+                    referenciaFavorito?.setValue("true")
                 } else {
                     vista.favoritos.setImageResource(R.drawable.ic_star_border_black_24dp)
                     Toast.makeText(contexto, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    //aqui asignar nuevo valor
+                    var referenciaPost = dataBase?.child(option.idPost)
+                    var referenciaFavorito = referenciaPost?.child("favorito")
+                    referenciaFavorito?.setValue("false")
                 }
 
             }
 
+            if(option.destacado.equals("true")){
+                vista.destacado.setImageResource(R.drawable.ic_whatshot1_black_24dp)
+                seleccionDestacado = true
+            }
             vista.destacado.setOnClickListener {
                 seleccionDestacado = !seleccionDestacado
                 if(seleccionDestacado){
                     vista.destacado.setImageResource(R.drawable.ic_whatshot1_black_24dp)
                     Toast.makeText(contexto, "Agregado a destacados", Toast.LENGTH_SHORT).show()
+                    //aqui asignar nuevo valor
+                    var referenciaPost = dataBase?.child(option.idPost)
+                    var referenciaDestacado = referenciaPost?.child("destacado")
+                    referenciaDestacado?.setValue("true")
                 } else {
                     vista.destacado.setImageResource(R.drawable.ic_whatshot0_black_24dp)
                     Toast.makeText(contexto, "Eliminado de destacados", Toast.LENGTH_SHORT).show()
+                    //aqui asignar nuevo valor
+                    var referenciaPost = dataBase?.child(option.idPost)
+                    var referenciaDestacado = referenciaPost?.child("destacado")
+                    referenciaDestacado?.setValue("false")
                 }
             }
 /*
