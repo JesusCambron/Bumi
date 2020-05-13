@@ -312,6 +312,7 @@ class PantallaPost : AppCompatActivity() {
             var inflator = LayoutInflater.from(contexto)
             var vista = inflator.inflate(R.layout.post_view, null)
 
+            //Si el registro es una imagen
             if(option.tipo.equals("Imagen")){
                 vista.videof.visibility = INVISIBLE
                 vista.image.visibility = VISIBLE
@@ -319,10 +320,11 @@ class PantallaPost : AppCompatActivity() {
                 var image = task.execute(option).get()
                 vista.image.setImageBitmap(image)
             } else {
+                //En caso de que sea video
                 vista.videof.visibility = VISIBLE
                 vista.image.visibility = INVISIBLE
                 vista.videof.setVideoPath(option.image)
-
+                vista.videof.seekTo(100)
                 var media:MediaController = MediaController(contexto)
                 media.setAnchorView(vista.videof)
                 vista.videof.setMediaController(media)
