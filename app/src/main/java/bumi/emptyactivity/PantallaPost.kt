@@ -1,18 +1,15 @@
 package bumi.emptyactivity
 
-import android.R.attr.src
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
@@ -119,6 +116,8 @@ class PantallaPost : AppCompatActivity() {
                     }
                 }
                 posts.reverse()
+                postFav.reverse()
+                postDest.reverse()
                 if(bundle != null) {
                     val type = bundle.getString("tipo")
                     when(type){
@@ -212,9 +211,14 @@ class PantallaPost : AppCompatActivity() {
 
         botonAgregar.setOnClickListener{
             var intento: Intent = Intent(this, AgregarPost::class.java)
-            startActivityForResult(intento,1)
+            startActivityForResult(intento,0)
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        finish()
     }
 
   /* override fun onStart() {
@@ -250,11 +254,6 @@ class PantallaPost : AppCompatActivity() {
        })
     }*/
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        this.finish()
-        startActivity(this.intent)
-    }
 /*
     fun cargarCatalogoInicioPlantas():ArrayList<Post> {
         var lista = ArrayList<Post>()
@@ -275,6 +274,11 @@ class PantallaPost : AppCompatActivity() {
         return lista
     }*/
 
+    fun actualizarView(){
+        var intento = this.intent
+        this.finish()
+        startActivity(intento)
+    }
 
     inner class obtenerImagen : AsyncTask<Post,Void,Bitmap>(){
 
@@ -308,6 +312,7 @@ class PantallaPost : AppCompatActivity() {
             var inflator = LayoutInflater.from(contexto)
             var vista = inflator.inflate(R.layout.post_view, null)
 
+            //Si el registro es una imagen
             if(option.tipo.equals("Imagen")){
                 vista.videof.visibility = INVISIBLE
                 vista.image.visibility = VISIBLE
@@ -315,10 +320,11 @@ class PantallaPost : AppCompatActivity() {
                 var image = task.execute(option).get()
                 vista.image.setImageBitmap(image)
             } else {
+                //En caso de que sea video
                 vista.videof.visibility = VISIBLE
                 vista.image.visibility = INVISIBLE
                 vista.videof.setVideoPath(option.image)
-
+                vista.videof.seekTo(100)
                 var media:MediaController = MediaController(contexto)
                 media.setAnchorView(vista.videof)
                 vista.videof.setMediaController(media)
@@ -346,6 +352,7 @@ class PantallaPost : AppCompatActivity() {
                 } else {
                     vista.favoritos.setImageResource(R.drawable.ic_star_border_black_24dp)
                     Toast.makeText(contexto, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    actualizarView()
                     //aqui asignar nuevo valor
                     var referenciaPost = dataBase?.child(option.idPost)
                     var referenciaFavorito = referenciaPost?.child("favorito")
@@ -370,6 +377,7 @@ class PantallaPost : AppCompatActivity() {
                 } else {
                     vista.destacado.setImageResource(R.drawable.ic_whatshot0_black_24dp)
                     Toast.makeText(contexto, "Eliminado de destacados", Toast.LENGTH_SHORT).show()
+                    actualizarView()
                     //aqui asignar nuevo valor
                     var referenciaPost = dataBase?.child(option.idPost)
                     var referenciaDestacado = referenciaPost?.child("destacado")
