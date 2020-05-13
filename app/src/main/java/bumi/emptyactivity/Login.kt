@@ -59,7 +59,6 @@ class Login : AppCompatActivity() {
         super.onStart()
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         val account = GoogleSignIn.getLastSignedInAccount(this)
@@ -76,7 +75,6 @@ class Login : AppCompatActivity() {
         try {
             val account =
                 completedTask.getResult(ApiException::class.java)
-
             // Signed in successfully, show authenticated UI.
             updateUI(account)
         } catch (e: ApiException) {
@@ -95,6 +93,4 @@ class Login : AppCompatActivity() {
         }
 
     }
-
-
 }

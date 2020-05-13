@@ -54,22 +54,6 @@ class AgregarPost : AppCompatActivity() {
         })
 
         videoButton?.setOnClickListener(View.OnClickListener {
-            /*
-            if (Build.VERSION.SDK_INT <= 19) {
-                val i = Intent()
-                i.type = "video/*"
-                i.action = Intent.ACTION_GET_CONTENT
-                i.addCategory(Intent.CATEGORY_OPENABLE)
-                startActivityForResult(i, VIDEO_PICK_CODE)
-            } else if (Build.VERSION.SDK_INT > 19) {
-                val intent = Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                )
-                startActivityForResult(intent, VIDEO_PICK_CODE)
-            }
-            */
-             */
             val intent = Intent()
             intent.type = "video/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -84,7 +68,7 @@ class AgregarPost : AppCompatActivity() {
         }
 
         botonPost.setOnClickListener {
-            //PantallaPost.posts.add(0,Post(tipo,imgUri, fname.text.toString()))
+
             if(tipo == "Imagen"){
                 dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                 storage = FirebaseStorage.getInstance().getReference("Images")
