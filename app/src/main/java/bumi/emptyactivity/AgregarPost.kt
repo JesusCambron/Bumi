@@ -21,7 +21,6 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import data.Datos
 import kotlinx.android.synthetic.main.activity_agregar_post.*
-import kotlinx.android.synthetic.main.post_view.*
 
 
 class AgregarPost : AppCompatActivity() {
@@ -94,10 +93,8 @@ class AgregarPost : AppCompatActivity() {
                 storage = FirebaseStorage.getInstance().getReference("Videos")
                 uploadFile()
             }
-            this.finish()
-            val returnIntent = Intent()
-            setResult(Activity.RESULT_CANCELED, returnIntent)
             finish()
+            setResult(0)
         }
 
     }
