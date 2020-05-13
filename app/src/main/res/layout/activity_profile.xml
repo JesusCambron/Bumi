@@ -177,13 +177,13 @@
             android:text="Muro"/>
 
     </com.google.android.material.tabs.TabLayout>
-
+<!--
     <Button
         android:id="@+id/boton_cerrarsesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Cerrar Sesion">
-
     </Button>
+-->
 </LinearLayout>
