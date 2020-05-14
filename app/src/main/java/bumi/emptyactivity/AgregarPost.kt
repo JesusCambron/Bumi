@@ -2,6 +2,7 @@ package bumi.emptyactivity
 
 import android.app.Activity
 
+
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -14,6 +15,8 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_agregar_post.*
 import data.Post
+
+
 
 
 
@@ -40,6 +43,10 @@ import kotlinx.android.synthetic.main.activity_agregar_post.*
 
 
 
+import kotlinx.android.synthetic.main.post_view.*
+
+
+
 class AgregarPost : AppCompatActivity() {
 
 
@@ -49,6 +56,8 @@ class AgregarPost : AppCompatActivity() {
     val PERMISSION_CODE: Int = 1001
     var tipo:String = ""
     var IMAGEN:Bitmap? = null
+
+
 
     var tipo:String = ""
     var imgUri: Uri? = null
@@ -60,15 +69,19 @@ class AgregarPost : AppCompatActivity() {
     var datos : Datos? =null
 
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_post)
-
 
         var imageButton: ImageButton = findViewById(R.id.botonImagen)
         var videoButton: ImageButton = findViewById(R.id.botonVideo)
 
         imageButton.setOnClickListener(View.OnClickListener {
+
+
         imageButton = findViewById(R.id.botonImagen)
         videoButton = findViewById(R.id.botonVideo)
         text = findViewById(R.id.texto)
@@ -77,6 +90,7 @@ class AgregarPost : AppCompatActivity() {
 
         imageButton?.setOnClickListener(View.OnClickListener {
 
+
             pickFromGallery()
             tipo = "Imagen"
         })
@@ -84,9 +98,12 @@ class AgregarPost : AppCompatActivity() {
 
         videoButton.setOnClickListener(View.OnClickListener {
 
+
         videoButton?.setOnClickListener(View.OnClickListener {
 
             /*
+
+
 
             if (Build.VERSION.SDK_INT <= 19) {
                 val i = Intent()
@@ -103,6 +120,7 @@ class AgregarPost : AppCompatActivity() {
             }
 
 
+
             */
              */
 
@@ -113,15 +131,15 @@ class AgregarPost : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), VIDEO_PICK_CODE)
             tipo = "Video"
 
+
+
         })
 
         var botonGif:ImageButton = findViewById(R.id.botonGif) as ImageButton
 
         botonGif.setOnClickListener {
             tipo = "Gif"
-
-
-        }
+      }
 
         botonPost.setOnClickListener {
             PantallaPost.posts.add(0,Post(tipo,IMAGEN, fname.text.toString()))
@@ -149,6 +167,17 @@ class AgregarPost : AppCompatActivity() {
             }
 
 
+        }
+
+        botonPost.setOnClickListener {
+            //PantallaPost.posts.add(0,Post(tipo,imgUri, fname.text.toString()))
+            if(tipo == "Imagen"){
+                dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
+                storage = FirebaseStorage.getInstance().getReference("Images")
+                uploadFile()
+                /*guardarPostFirebase()*/
+            }
+
             this.finish()
             val returnIntent = Intent()
             setResult(Activity.RESULT_CANCELED, returnIntent)
@@ -159,6 +188,9 @@ class AgregarPost : AppCompatActivity() {
         }
 
     }
+
+
+
 
 
 
@@ -178,6 +210,8 @@ class AgregarPost : AppCompatActivity() {
         var key = postReference?.key
         postReference?.key
 
+
+
     }*/
 
     private fun uploadFile(){
@@ -185,8 +219,11 @@ class AgregarPost : AppCompatActivity() {
         datos?.tipo = tipo
         datos?.imageId = " "
         datos?.descripcion = fname.text.toString()
-        datos?.favorito = "false"
+      datos?.favorito = "false"
         datos?.destacado = "false"
+
+        //datos?.favorito = false
+
 
         var ref:StorageReference = storage!!.child(imgId)
 
@@ -200,18 +237,26 @@ class AgregarPost : AppCompatActivity() {
                 Log.i("img",imageReference.toString())
                 datos?.imageId = imageReference.toString()
 
+
                 var postReference = dataBase?.push()?.key
                 datos?.id = postReference
                 Log.i("post",postReference)
                 if (postReference != null) {
                     dataBase?.child(postReference)?.setValue(datos)
                 }
+               var postReference = dataBase?.push()
+                postReference?.setValue(datos)
+
                 Toast.makeText(this,"Imagen subida",Toast.LENGTH_SHORT).show()
             }
         }
         uploadTask.addOnFailureListener(OnFailureListener {
             Toast.makeText(this,"La imagen no ha podido ser subida", Toast.LENGTH_SHORT).show()
         })
+
+
+
+
 
     }
 
@@ -229,7 +274,7 @@ class AgregarPost : AppCompatActivity() {
         if (resultCode === Activity.RESULT_OK)
             when (requestCode) {
                 IMAG_PICK_CODE -> {
-                    val imageUri = data!!.data
+                   val imageUri = data!!.data
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
                     IMAGEN = bitmap
 
@@ -257,6 +302,8 @@ class AgregarPost : AppCompatActivity() {
         }
     }
 
+
+
                     imgUri = data!!.data!!
                     //preimagen.setImageURI(imageUri)
                     //val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
@@ -266,14 +313,15 @@ class AgregarPost : AppCompatActivity() {
                 VIDEO_PICK_CODE -> {
                     imgUri = data!!.data!!
                     //pre.setVideoURI(mVideoURI)
-                /*MediaController mediaController = new MediaController(this);
-                        mediaController.setAnchorView(videoView);
-                        videoView.setMediaController(mediaController);
-                    pre.start()*/
+                    /*MediaController mediaController = new MediaController(this);
+                            mediaController.setAnchorView(videoView);
+                            videoView.setMediaController(mediaController);
+                        pre.start()*/
                 }
 
-        }
+            }
     }
+
 
 
 

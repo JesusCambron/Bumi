@@ -1,105 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
 
 <FrameLayout
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <FrameLayout
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imagen"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widthFondoSeccion"
-            android:scaleType="centerCrop"
-            android:src="@drawable/agua">
+        android:layout_height="@dimen/widthFondoSeccion"
+        android:scaleType="centerCrop"
+        android:src="@drawable/agua">
 
-        </ImageView>
-        <TextView
-            android:id="@+id/texto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Agua"
-            android:textColor="@color/blanco"
-            android:fontFamily="@font/ebrima"
-            android:textStyle="bold"
-            android:textSize="35sp">
+    </ImageView>
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Agua"
+        android:textColor="@color/blanco"
+        android:fontFamily="@font/ebrima"
+        android:textStyle="bold"
+        android:textSize="35sp">
 
-
-        </TextView>
-    </FrameLayout>
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        >
-        <Button
-            android:id="@+id/boton1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:fontFamily="@font/ebrima"
-            android:text="Consejos"
-            android:textSize="10sp"
-            android:textColor="@color/blanco"
-            android:background="@drawable/circle"
-            android:textStyle="bold"
-            android:layout_marginBottom="30dp">
-        </Button>
-        <Button
-            android:id="@+id/boton2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:fontFamily="@font/ebrima"
-            android:text="Consejos"
-            android:textSize="10sp"
-            android:textColor="@color/blanco"
-            android:background="@drawable/circle"
-            android:textStyle="bold"
-            android:layout_marginLeft="70dp">
-        </Button>
-        <Button
-            android:id="@+id/boton3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:fontFamily="@font/ebrima"
-            android:text="Consejos"
-            android:textSize="10sp"
-            android:textColor="@color/blanco"
-            android:background="@drawable/circle"
-            android:textStyle="bold">
-        </Button>
-        <Button
-            android:id="@+id/boton4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:fontFamily="@font/ebrima"
-            android:text="Consejos"
-            android:textSize="10sp"
-            android:textColor="@color/blanco"
-            android:background="@drawable/circle"
-            android:textStyle="bold"
-            android:layout_marginLeft="70dp">
-        </Button>
-
-
-    </GridLayout>
+    </TextView>
+</FrameLayout>
 
 <GridLayout
     android:layout_width="wrap_content"
@@ -157,10 +88,6 @@ android:orientation="vertical">
         android:layout_marginLeft="70dp">
     </Button>
 </GridLayout>
-
-
-
-
     <LinearLayout
         android:layout_marginTop="45dp"
         android:layout_width="match_parent"
@@ -168,6 +95,5 @@ android:orientation="vertical">
         android:background="@color/colorPrimary"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"/>
-
 
 </LinearLayout>

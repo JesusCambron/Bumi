@@ -25,10 +25,10 @@ class Reloj : AppCompatActivity() {
 
 
 
-
 class Reloj : AppCompatActivity() {
     var jsonFile: JsonFile? = null
     var data: Boolean = false
+
 
     var encendido:Boolean = false
     var tiempoTotal:Long = 0

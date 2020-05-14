@@ -40,7 +40,7 @@
             android:id="@+id/cronometro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
+            android:textColor="@color/azul"
             android:textSize="40sp">
 
         </Chronometer>
@@ -53,22 +53,6 @@
                     android:textColor="@color/azul"
                     android:textSize="50dp"/>
         -->
-=======
-            android:textColor="@color/azul"
-            android:textSize="40sp">
-
-        </Chronometer>
-<!--
-        <TextView
-            android:id="@+id/vistaTiempo"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="00:00:00"
-            android:textColor="@color/azul"
-            android:textSize="50dp"/>
-
--->
->>>>>>> master
         <Button
             android:id="@+id/botonReloj"
             android:layout_marginTop="20dp"

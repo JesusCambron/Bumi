@@ -8,16 +8,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".AgregarPost"></activity>
-=======
         <activity android:name=".AhorroAgua"></activity>
         <activity android:name=".Login" />
         <activity android:name=".AgregarPost" />
->>>>>>> master
         <activity android:name=".Reloj" />
         <activity android:name=".PantallaPost" />
         <activity android:name=".Opciones" />
