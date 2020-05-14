@@ -67,18 +67,22 @@ class AgregarPost : AppCompatActivity() {
         }
 
         botonPost.setOnClickListener {
-
-            if(tipo == "Imagen"){
-                dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
-                storage = FirebaseStorage.getInstance().getReference("Images")
-                uploadFile()
-            }else{
-                dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
-                storage = FirebaseStorage.getInstance().getReference("Videos")
-                uploadFile()
+            var texto:String = fname.text.toString()
+            texto = texto.trim()
+            if(!texto.equals("")) {
+                if(tipo == "Imagen"){
+                    dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
+                    storage = FirebaseStorage.getInstance().getReference("Images")
+                    uploadFile()
+                }else{
+                    dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
+                    storage = FirebaseStorage.getInstance().getReference("Videos")
+                    uploadFile()
+                }
+                finish()
+                setResult(0)
             }
-            finish()
-            setResult(0)
+
         }
 
     }
