@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_opciones.*
 <<<<<<< HEAD
 import kotlinx.android.synthetic.main.pantalla_opciones.view.*
@@ -28,9 +29,7 @@ class Opciones : AppCompatActivity() {
         if(bundle!=null){
             val type= bundle.getString("type")
             when(type) {
-
                 "plantas"->{
-
                     boton1.setText("Inicio")
                     boton2.setText("Favoritos")
                     boton3.setText("Destacados")
@@ -81,8 +80,8 @@ class Opciones : AppCompatActivity() {
                         startActivity(intentPost)
                     })
                     boton4.setOnClickListener(View.OnClickListener {
-                        var intentPost = Intent(this,PantallaPost::class.java)
-                        intentPost.putExtra("tipo","aguaLitros")
+                        var intentPost = Intent(this,AhorroAgua::class.java)
+                        //intentPost.putExtra("tipo","aguaLitros")
                         startActivity(intentPost)
                     })
                 }

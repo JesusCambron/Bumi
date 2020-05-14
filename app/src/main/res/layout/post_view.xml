@@ -7,7 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="60dp"
@@ -22,9 +21,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp">
-
         </TextView>
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -50,7 +47,6 @@
 
             </ImageView>
             -->
-
         <TextView
             android:id="@+id/descripcion"
             android:layout_width="match_parent"
@@ -60,7 +56,6 @@
             android:textSize="20sp"
             android:textAlignment="center"
             android:text="El dia de hoy vengo a compartirles el progreso de mi jardin de girasoles">
-
         </TextView>
 
         <LinearLayout
@@ -80,7 +75,6 @@
                 android:layout_height="35dp"
                 android:layout_marginRight="10dp"/>
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

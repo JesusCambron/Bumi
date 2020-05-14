@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         android:id="@+id/opcion"
         android:textSize="16sp"
-        android:text="Foto"
+        android:text=""
         android:textAlignment="viewStart"
         android:paddingLeft="15dp"
         android:paddingTop="7dp"
@@ -40,10 +40,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 <!--
         <Button
             android:id="@+id/refrescar"
@@ -55,14 +59,11 @@
         -->
         <Button
             android:id="@+id/botonAgregar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="+"
-
-            android:background="@color/colorPrimary"
-            android:textColor="@color/blanco"
-            android:layout_margin="10dp"
-            android:textSize="25sp"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/blanco"
+            android:background="@drawable/ic_add_circle_outline_black_24dp"
+            android:textColor="@color/blanco"/>
 
     </LinearLayout>
 

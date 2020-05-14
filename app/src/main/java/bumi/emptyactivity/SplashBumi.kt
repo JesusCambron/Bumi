@@ -1,11 +1,15 @@
 package bumi.emptyactivity
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+
 
 class SplashBumi : AppCompatActivity() {
 
@@ -21,3 +25,5 @@ class SplashBumi : AppCompatActivity() {
         },3000)
     }
 }
+
+
