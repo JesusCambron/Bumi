@@ -12,19 +12,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo_login">
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/blanco"
+            android:layout_margin="10dp"
+            android:background="@drawable/fondoiniciobumi"
             android:alpha="0.9">
             <ImageView
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/logo_bumi"
+                android:src="@drawable/hojas"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center">
 
@@ -32,34 +33,41 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="50dp"
+                android:layout_height="50dp"
+                android:hint="Usuario:"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginHorizontal="60dp"
                 android:layout_marginTop="80dp"
                 android:paddingHorizontal="10dp"
                 android:inputType="textPersonName"
-                android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-                android:background="@drawable/textbox"
                 android:layout_gravity="center">
 
             </EditText>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="50dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="60dp"
                 android:layout_marginTop="20dp"
                 android:paddingHorizontal="10dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:inputType="textPersonName"
-                android:drawableLeft="@drawable/ic_lock_black_24dp"
-                android:background="@drawable/textbox"
+                android:hint="Contraseña:"
                 android:layout_gravity="center">
 
             </EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:text="Conectarse con:"/>
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 />
         </LinearLayout>

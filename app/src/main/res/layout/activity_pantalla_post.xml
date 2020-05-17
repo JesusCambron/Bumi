@@ -59,8 +59,8 @@
         -->
         <Button
             android:id="@+id/botonAgregar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:backgroundTint="@color/blanco"
             android:background="@drawable/ic_add_circle_outline_black_24dp"
             android:textColor="@color/blanco"/>
