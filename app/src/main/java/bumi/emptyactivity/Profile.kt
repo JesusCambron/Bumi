@@ -82,12 +82,11 @@ class Profile : AppCompatActivity() {
         val bundle = intent.extras
         if(bundle != null){
             val nombre = bundle.getString("name")
-            val imagenUrl = bundle.getString("image")
+            val imagenUrl = bundle.getString("img")
             profile_name.setText(nombre)
             var task = obtenerImagen()
-            //var image = task.execute(imagenUrl).get()
-            //profile_image.setImageBitmap(image)
-            //Log.i("image",imagenUrl)
+            var image = task.execute(imagenUrl).get()
+            profile_image.setImageBitmap(image)
         }
 
         botonPlantas.setOnClickListener {
