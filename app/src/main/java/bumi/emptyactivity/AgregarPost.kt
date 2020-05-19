@@ -12,6 +12,9 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.giphy.sdk.core.models.Media
+import com.giphy.sdk.ui.Giphy
+import com.giphy.sdk.ui.views.GiphyDialogFragment
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
@@ -23,7 +26,7 @@ import data.Datos
 import kotlinx.android.synthetic.main.activity_agregar_post.*
 
 
-class AgregarPost : AppCompatActivity() {
+class AgregarPost : AppCompatActivity(), GiphyDialogFragment.GifSelectionListener {
 
 
     val IMAG_PICK_CODE: Int = 1000
@@ -46,6 +49,7 @@ class AgregarPost : AppCompatActivity() {
         text = findViewById(R.id.texto)
         datos = Datos()
 
+        Giphy.configure(this, "s03Gg33IRca8s3St7AphQpw8WTZh52v4")
 
         imageButton?.setOnClickListener(View.OnClickListener {
             pickFromGallery()
@@ -64,6 +68,7 @@ class AgregarPost : AppCompatActivity() {
 
         botonGif.setOnClickListener {
             tipo = "Gif"
+            GiphyDialogFragment.newInstance().show(supportFragmentManager, "giphy_dialog")
         }
 
         botonPost.setOnClickListener {
@@ -74,6 +79,9 @@ class AgregarPost : AppCompatActivity() {
                     dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                     storage = FirebaseStorage.getInstance().getReference("Images")
                     uploadFile()
+                }else if(tipo == "Gif"){
+                    dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
+                    subirGif()
                 }else{
                     dataBase = FirebaseDatabase.getInstance().reference.child("Posts")
                     storage = FirebaseStorage.getInstance().getReference("Videos")
@@ -137,11 +145,26 @@ class AgregarPost : AppCompatActivity() {
         uploadTask.addOnFailureListener(OnFailureListener {
             Toast.makeText(this,"La imagen no ha podido ser subida", Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun subirGif(){
+        var imgId = System.currentTimeMillis().toString()+"."+ imgUri?.let { getExtension(it) }
+        datos?.tipo = tipo
+        datos?.descripcion = fname.text.toString()
+        datos?.favorito = "false"
+        datos?.destacado = "false"
+
+        var postReference = dataBase?.push()?.key
+        datos?.id = postReference
+        Log.i("post",postReference)
+        if (postReference != null) {
+            dataBase?.child(postReference)?.setValue(datos)
+        }
+        Toast.makeText(this,"Imagen subida",Toast.LENGTH_SHORT).show()
 
     }
 
     private fun pickFromGallery() {
-
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -168,8 +191,22 @@ class AgregarPost : AppCompatActivity() {
                         videoView.setMediaController(mediaController);
                     pre.start()*/
                 }
-
         }
+    }
+
+    override fun didSearchTerm(term: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDismissed() {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun onGifSelected(media: Media, searchTerm: String?) {
+        Log.i("gif",media.url)
+        Log.i("gif3",media.id)
+        datos?.imageId = "https://media.giphy.com/media/"+media.id+"/giphy.gif"
     }
 
 

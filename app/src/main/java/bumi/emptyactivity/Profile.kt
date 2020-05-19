@@ -14,6 +14,8 @@ import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.viewpager.widget.ViewPager
 import bumi.emptyactivity.R.drawable.circle
+import com.giphy.sdk.ui.Giphy
+import com.giphy.sdk.ui.views.GiphyDialogFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -39,6 +41,8 @@ class Profile : AppCompatActivity() {
         val botonReciclaje: ImageButton = findViewById(R.id.botonReciclaje) as ImageButton
 
         //var viewPager:ViewPager = pager
+
+
 
         bioBoton.setOnClickListener {
             pager.currentItem = 0
