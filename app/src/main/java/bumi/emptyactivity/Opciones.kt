@@ -56,7 +56,7 @@ class Opciones : AppCompatActivity() {
                     texto.setText("Agua")
                     imagen.setImageResource(R.drawable.agua)
                     boton1.setOnClickListener(View.OnClickListener {
-                        var intentPost = Intent(this,PantallaPost::class.java)
+                        var intentPost = Intent(this,Consejos::class.java)
                         intentPost.putExtra("tipo","aguaConsejos")
                         startActivity(intentPost)
                     })
