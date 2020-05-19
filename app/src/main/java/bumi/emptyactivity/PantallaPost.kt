@@ -90,6 +90,7 @@ class PantallaPost : AppCompatActivity() {
                             }
                         } }
                             ?.let { it2 -> posts.add(it2) }
+                        if(data.usuario.equals(mAuth.currentUser?.email)){
                         if(data.favorito.equals("true")){
                             data.id?.let { it1 -> data.tipo?.let { it2 ->
                                 data.descripcion?.let { it3 ->
@@ -104,19 +105,25 @@ class PantallaPost : AppCompatActivity() {
                             } }
                                 ?.let { it2 -> postFav.add(it2) }
                         }
-                        if(data.destacado.equals("true")){
-                            data.id?.let { it1 -> data.tipo?.let { it2 ->
-                                data.descripcion?.let { it3 ->
-                                    data.favorito?.let { it4 ->
-                                        data.destacado?.let { it5 ->
-                                            Post(it1,
-                                                it2,data.imageId, it3, it4, it5
-                                            )
+                        }
+                        if(data.usuario.equals(mAuth.currentUser?.email)) {
+                            if (data.destacado.equals("true")) {
+                                data.id?.let { it1 ->
+                                    data.tipo?.let { it2 ->
+                                        data.descripcion?.let { it3 ->
+                                            data.favorito?.let { it4 ->
+                                                data.destacado?.let { it5 ->
+                                                    Post(
+                                                        it1,
+                                                        it2, data.imageId, it3, it4, it5
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
-                            } }
-                                ?.let { it2 -> postDest.add(it2) }
+                                    ?.let { it2 -> postDest.add(it2) }
+                            }
                         }
                         if(data.usuario.equals(mAuth.currentUser?.email)){
                             data.id?.let { it1 -> data.tipo?.let { it2 ->
