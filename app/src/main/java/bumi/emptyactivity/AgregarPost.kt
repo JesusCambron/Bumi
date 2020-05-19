@@ -17,6 +17,7 @@ import com.giphy.sdk.ui.Giphy
 import com.giphy.sdk.ui.views.GiphyDialogFragment
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -39,6 +40,7 @@ class AgregarPost : AppCompatActivity(), GiphyDialogFragment.GifSelectionListene
     private var storage: StorageReference? = null
     private var dataBase: DatabaseReference? = null
     var datos : Datos? =null
+    lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class AgregarPost : AppCompatActivity(), GiphyDialogFragment.GifSelectionListene
         text = findViewById(R.id.texto)
         datos = Datos()
 
+        mAuth = FirebaseAuth.getInstance()
         Giphy.configure(this, "s03Gg33IRca8s3St7AphQpw8WTZh52v4")
 
         imageButton?.setOnClickListener(View.OnClickListener {
@@ -120,6 +123,7 @@ class AgregarPost : AppCompatActivity(), GiphyDialogFragment.GifSelectionListene
         datos?.descripcion = fname.text.toString()
         datos?.favorito = "false"
         datos?.destacado = "false"
+        datos?.usuario = mAuth.currentUser?.email
 
         var ref:StorageReference = storage!!.child(imgId)
 
@@ -153,6 +157,7 @@ class AgregarPost : AppCompatActivity(), GiphyDialogFragment.GifSelectionListene
         datos?.descripcion = fname.text.toString()
         datos?.favorito = "false"
         datos?.destacado = "false"
+        datos?.usuario = mAuth.currentUser?.email
 
         var postReference = dataBase?.push()?.key
         datos?.id = postReference

@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.StorageReference
 import data.Datos
@@ -33,20 +34,23 @@ class PantallaPost : AppCompatActivity() {
         var posts = ArrayList<Post>()
         var postFav = ArrayList<Post>()
         var postDest = ArrayList<Post>()
+        var misPost = ArrayList<Post>()
     }
 
     var dataBase:DatabaseReference? = null
     var storage: StorageReference? = null
     var adaptador:AdaptadorPosts? = null
+    lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_post)
 
-        Toast.makeText(applicationContext,"Cargando datos...",Toast.LENGTH_LONG).show()
+        barraProgreso.visibility = View.VISIBLE
         dataBase = FirebaseDatabase.getInstance().getReference().child("Posts")
         val bundle = intent.extras
 
+        mAuth = FirebaseAuth.getInstance()
         /*dataBase!!.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -67,6 +71,7 @@ class PantallaPost : AppCompatActivity() {
                 posts.clear()
                 postFav.clear()
                 postDest.clear()
+                misPost.clear()
                 val children = p0!!.children
                 // This returns the correct child count...
                 children.forEach {
@@ -113,29 +118,48 @@ class PantallaPost : AppCompatActivity() {
                             } }
                                 ?.let { it2 -> postDest.add(it2) }
                         }
+                        if(data.usuario.equals(mAuth.currentUser?.email)){
+                            data.id?.let { it1 -> data.tipo?.let { it2 ->
+                                data.descripcion?.let { it3 ->
+                                    data.favorito?.let { it4 ->
+                                        data.destacado?.let { it5 ->
+                                            Post(it1,
+                                                it2,data.imageId, it3, it4, it5
+                                            )
+                                        }
+                                    }
+                                }
+                            } }
+                                ?.let { it2 -> misPost.add(it2) }
+                        }
                     }
                 }
                 posts.reverse()
                 postFav.reverse()
                 postDest.reverse()
+                misPost.reverse()
                 if(bundle != null) {
                     val type = bundle.getString("tipo")
                     when(type){
                         "plantasInicio" -> {
+                            barraProgreso.visibility = View.GONE
                             adaptador = AdaptadorPosts(this@PantallaPost,posts)
                             opcion.text = "Inicio"
                         }
                         "plantasFavoritos" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Favoritos"
                             adaptador = AdaptadorPosts(this@PantallaPost, postFav)
                         }
                         "plantasDestacados" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Destacados"
                             adaptador = AdaptadorPosts(this@PantallaPost, postDest)
                         }
                         "plantasMisPlantas" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Mis Plantas"
-                            //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                            adaptador = AdaptadorPosts(this@PantallaPost, misPost)
                         }
 
                         "aguaConsejos" -> {
@@ -156,20 +180,24 @@ class PantallaPost : AppCompatActivity() {
                         }
 
                         "reciclajeInicio" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Inicio"
                             adaptador = AdaptadorPosts(this@PantallaPost,posts)
                         }
                         "reciclajeFavoritos" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Favoritos"
                             adaptador = AdaptadorPosts(this@PantallaPost, postFav)
                         }
                         "reciclajeMispost" -> {
+                            barraProgreso.visibility = View.GONE
                             opcion.text = "Mis Posts"
-                            adaptador = AdaptadorPosts(this@PantallaPost, postFav)
+                            adaptador = AdaptadorPosts(this@PantallaPost, misPost)
                         }
                         "reciclajeReciclaje" -> {
-                            opcion.text = "Reciclaje"
-                            //adaptador = AdaptadorPosts(this,cargarCatalogoMisPlantas())
+                            barraProgreso.visibility = View.GONE
+                            opcion.text = "Mis Posts"
+                            adaptador = AdaptadorPosts(this@PantallaPost, misPost)
                         }
 
                     }
@@ -181,7 +209,7 @@ class PantallaPost : AppCompatActivity() {
 
 
         var nPrevSelGridItem = -1
-        listaPost.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+        /*listaPost.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             var viewPrev: View? = null
             override fun onItemClick(
                 parent: AdapterView<*>?, view: View,
@@ -207,7 +235,7 @@ class PantallaPost : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        })
+        })*/
 
         botonAgregar.setOnClickListener{
             var intento: Intent = Intent(this, AgregarPost::class.java)

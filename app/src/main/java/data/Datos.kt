@@ -7,6 +7,7 @@ class Datos {
     var descripcion:String? = null
     var favorito: String? = null
     var destacado: String? = null
+    var usuario:String? = null
 
     constructor() {
 
@@ -18,7 +19,7 @@ class Datos {
         imageId: String?,
         descripcion: String?,
         favorito: String?,
-        destacado: String?
+        destacado: String?,usuario:String?
     ) {
         this.id = id
         this.tipo = tipo
@@ -26,6 +27,7 @@ class Datos {
         this.descripcion = descripcion
         this.favorito = favorito
         this.destacado = destacado
+        this.usuario = usuario
     }
 
 
